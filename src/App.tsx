@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import ConnectWallet from "./pages/WalletConnect";
-import Home from "./pages/Home";
+import Home from "./pages/HomePage";
 
 function App() {
   return (
@@ -17,3 +17,4 @@ function App() {
 
 export default App;
 // This is the main entry point of the React application.
+

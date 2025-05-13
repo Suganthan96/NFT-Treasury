@@ -1,15 +1,22 @@
-import "../index.css";
+// src/components/NFTCard.tsx
+import React from 'react';
+import './NFTCard.css';
 
-type Props = {
+interface NFTCardProps {
+  imageUrl: string;
   title: string;
-  image: string;
-};
+}
 
-export default function NFTCard({ title, image }: Props) {
+const NFTCard: React.FC<NFTCardProps> = ({ imageUrl, title }) => {
   return (
     <div className="nft-card">
-      <img src={image} alt={title} className="nft-image" />
-      <h3>{title}</h3>
+      <div className="badge">Membership</div>
+      <img src={imageUrl} alt={title} className="nft-image" />
+      <div className="nft-title">{title}</div>
+      <button className="buy-button">Buy Membership</button>
     </div>
   );
-}
+};
+
+export default NFTCard;
+
