@@ -1,56 +1,91 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎨 NFT-Treasury
 
-Currently, two official plugins are available:
+NFT-Treasury is a Vite-powered React + TypeScript project scaffolded to build a decentralized platform for managing and showcasing NFTs. This project is intended as the foundation for a Web3-based treasury system where users can view, mint, and track NFTs in a performant and modular frontend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React, TypeScript, Vite
+- **Linting**: ESLint (with recommended TypeScript and React rules)
+- **Styling**: Tailwind CSS (planned)
+- **Smart Contract Integration**: (Planned using Ethers.js / Web3.js)
+- **Wallet Connection**: (Planned with MetaMask via `@web3-react` or `wagmi`)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📁 Folder Structure
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+NFT-Treasury/
+├── public/               # Static files
+├── src/
+│   ├── assets/           # Images, logos, and media
+│   ├── components/       # Reusable React components
+│   ├── pages/            # Page-level React components (e.g., Home, Dashboard)
+│   ├── utils/            # Utility functions
+│   ├── App.tsx           # Main app wrapper
+│   └── main.tsx          # Entry point
+├── scripts/              # Deployment scripts or blockchain interaction
+├── .eslintrc             # ESLint config
+├── tsconfig.json         # TypeScript config
+├── vite.config.ts        # Vite configuration
+└── package.json
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Setup Instructions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Clone the Repository
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+git clone https://github.com/Suganthan96/NFT-Treasury.git
+cd NFT-Treasury
 ```
-=======
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the Development Server
+
+```bash
+npm run dev
+```
+
+Your app should now be running at [http://localhost:5173](http://localhost:5173)
+
+## ✅ Linting
+
+Run the linter with:
+
+```bash
+npm run lint
+```
+
+## 📦 Build for Production
+
+```bash
+npm run build
+```
+
+## 🔍 Future Improvements
+
+- Integrate ERC-721 and ERC-1155 support
+- Add MetaMask wallet authentication
+- Display NFT metadata from IPFS or other decentralized storage
+- Implement smart contract interactions
+
+## 🤝 Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change or add.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## ✨ Author
+
+Made with 💻 by [Suganthan](https://github.com/Suganthan96)

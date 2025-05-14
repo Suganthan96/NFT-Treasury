@@ -83,7 +83,7 @@ export default function Home() {
     }}>
       <div className="user-info-container">
         <div className="user-avatar">
-          <img src="nft1.png" alt="User" className="avatar-img" />
+          <img src="user.png" alt="User" className="avatar-img" />
         </div>
         <div className="user-details">
           <p className="user-name">NFT Collector</p>
