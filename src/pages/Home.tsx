@@ -44,7 +44,7 @@ export default function Home() {
       const hexValue = '0x' + valueInWei.toString(16);
 
       const transactionParameters = {
-        to: '0x72a1161aee9a11d00c6200c0daa3fcade187d5cd',
+        to: '0xa9493e5232f0b27e9fdb4b2ded35fc8abb891bec',
         from: accounts[0],
         value: hexValue,
         gas: '0x' + (300000).toString(16)
@@ -70,7 +70,7 @@ export default function Home() {
   const handleLogout = () => {
     // Clear wallet connection and redirect to login
     setWalletAddress(null);
-    navigate('/login');
+    navigate('/Login');
   };
 
   return (

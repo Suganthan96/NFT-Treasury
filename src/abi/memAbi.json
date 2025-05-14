@@ -1,7 +1,4 @@
-export const memAddress = "0xa9493e5232f0b27e9fdb4b2ded35fc8abb891bec";
-
-export const memAbi = [
-    [
+[
 	{
 		"anonymous": false,
 		"inputs": [
@@ -47,5 +44,4 @@ export const memAbi = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
 ]

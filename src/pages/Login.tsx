@@ -21,7 +21,7 @@ export default function Login() {
       </video>
 
       <div className="content">
-        <h1 className="title">Gated NFT Website</h1>
+        <h1 className="title">NFT Treasury</h1>
         <button onClick={() => navigate("/connect")} className="button">
           Login
         </button>
