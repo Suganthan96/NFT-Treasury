@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { BrowserProvider, parseEther } from "ethers";
 import NFTCard from "../components/NFTcard";
 import "../index.css";
-
-declare global {
-  interface Window {
-    ethereum?: EthereumProvider;
-  }
-}
 
 export default function Home() {
   const navigate = useNavigate();
@@ -25,7 +20,7 @@ export default function Home() {
         }
       }
     };
-    
+
     fetchWalletAddress();
   }, []);
 
@@ -39,15 +34,21 @@ export default function Home() {
       setTransactionStatus('pending');
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      const membershipPrice = 0.0000001;
-      const valueInWei = membershipPrice * 1e18;
-      const hexValue = '0x' + valueInWei.toString(16);
+      const membershipPrice = "0.0000001";
+      const valueInWei = parseEther(membershipPrice);
+      const provider = new BrowserProvider(window.ethereum);
+      const gasLimitHex = "0x" + (300000).toString(16);
+
+      // ✅ ethers v6 doesn't support getGasPrice(); use raw RPC call
+      const gasPriceHex = await provider.send("eth_gasPrice", []);
 
       const transactionParameters = {
-        to: '0xa9493e5232f0b27e9fdb4b2ded35fc8abb891bec',
+        to: '0x1F958d24298e04e8516EA972eFc2A3Bd50B4BF4F',
         from: accounts[0],
-        value: hexValue,
-        gas: '0x' + (300000).toString(16)
+        value: valueInWei.toString(), // still a string, auto-handled by MetaMask
+        gasLimit: gasLimitHex, 
+     // convert 300000 to hex string
+        gasPrice: gasPriceHex          // already in hex string format
       };
 
       const txHash = await window.ethereum.request({
@@ -57,7 +58,7 @@ export default function Home() {
 
       console.log('Transaction hash:', txHash);
       setTransactionStatus('success');
-      setCoins(coins + 1);
+      setCoins(prev => prev + 1);
       setShowCoinAnimation(true);
       setTimeout(() => setShowCoinAnimation(false), 1000);
 
@@ -68,13 +69,12 @@ export default function Home() {
   };
 
   const handleLogout = () => {
-    // Clear wallet connection and redirect to login
     setWalletAddress(null);
     navigate('/Login');
   };
 
   return (
-    <div className="page" style={{ 
+    <div className="page" style={{
       backgroundImage: "url('n.jpg')",
       backgroundSize: "cover",
       backgroundPosition: "center",
@@ -92,10 +92,7 @@ export default function Home() {
             <span className="coin-icon">🪙</span>
             <span className="coin-count">{coins}</span>
           </div>
-          <button 
-            onClick={handleLogout}
-            className="logout-button"
-          >
+          <button onClick={handleLogout} className="logout-button">
             Logout
           </button>
         </div>
@@ -123,13 +120,11 @@ export default function Home() {
               Processing transaction...
             </div>
           )}
-
           {transactionStatus === 'success' && (
             <div className="transaction-status success">
               Membership activated! +1 🪙
             </div>
           )}
-
           {transactionStatus === 'error' && (
             <div className="transaction-status error">
               Transaction failed. Please try again.

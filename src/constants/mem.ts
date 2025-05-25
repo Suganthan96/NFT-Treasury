@@ -1,7 +1,7 @@
-export const memAddress = "0xa9493e5232f0b27e9fdb4b2ded35fc8abb891bec";
+export const memAddress = "0xe01Add0c3640a8314132bAF491d101A38ffEF4f0";
 
 export const memAbi = [
-    [
+	[
 	{
 		"anonymous": false,
 		"inputs": [
@@ -27,6 +27,14 @@ export const memAbi = [
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	},
 	{
 		"inputs": [
