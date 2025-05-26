@@ -11,7 +11,7 @@
 * *Wallet Connection*: Planned with MetaMask via @web3-react or wagmi
 
 
-##  Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -41,18 +41,18 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout cert/key.pem -out cert/cert.pe
 
 #### Trust the Certificate
 
-* **On Windows**:
+* On Windows:
 
   1. Double-click `cert/cert.pem`
   2. Click "Install Certificate"
   3. Select "Local Machine"
   4. Choose "Place all certificates in the following store"
-  5. Select **Trusted Root Certification Authorities**
+  5. Select Trusted Root Certification Authorities
 
-* **On macOS**:
+* On macOS:
 
-  1. Open `cert/cert.pem` in **Keychain Access**
-  2. Set Trust to **Always Trust**
+  1. Open `cert/cert.pem` in Keychain Access
+  2. Set Trust to Always Trust
 
 ---
 
@@ -84,11 +84,11 @@ npm run dev
 ```
 
 Application will run at:
-➡ [https://localhost:5173](https://localhost:5173)
+[https://localhost:5173](https://localhost:5173)
 
 ---
 
-##  Linting
+## Linting
 
 To run ESLint:
 
@@ -98,7 +98,7 @@ npm run lint
 
 ---
 
-##  Build for Production
+## Build for Production
 
 ```bash
 npm run build
@@ -106,7 +106,7 @@ npm run build
 
 ---
 
-##  Planned Features
+## Planned Features
 
 * ERC-721 and ERC-1155 NFT support
 * MetaMask wallet authentication
@@ -115,16 +115,18 @@ npm run build
 
 ---
 
-##  Contributing
+## Contributing
 
-Pull requests are welcome!
+Pull requests are welcome.
 For significant feature proposals, please open an issue first to discuss changes.
 
 ---
 
-##  License
+## License
 
 This project is licensed under the [MIT License](LICENSE).
 
----
+```
 
+You can safely use this version in your project. Let me know if you want to include images, a table of contents, or GitHub badges.
+```
