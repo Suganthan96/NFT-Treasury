@@ -9,7 +9,7 @@
 
 * *Frontend*: React, TypeScript, Vite
 * *Linting*: ESLint (configured for TypeScript and React)
-* *Styling*: Tailwind CSS (planned)
+* *Styling*: CSS (planned)
 * *Smart Contract Integration*: Planned using Ethers.js or Web3.js
 * *Wallet Connection*: Planned with MetaMask via @web3-react or wagmi
 
