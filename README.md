@@ -31,13 +31,12 @@ npm install
 To use https://localhost and avoid MetaMask blocking http connections:
 
 1. *Generate SSL certificate using OpenSSL:*
-
-   bash
+   
    mkdir cert
    openssl req -x509 -newkey rsa:2048 -nodes -keyout cert/key.pem -out cert/cert.pem -days 365
    
 
-2. *Trust the certificate:*
+3. *Trust the certificate:*
 
    * On Windows:
 
