@@ -13,26 +13,6 @@
 * *Smart Contract Integration*: Planned using Ethers.js or Web3.js
 * *Wallet Connection*: Planned with MetaMask via @web3-react or wagmi
 
-## Folder Structure
-
-
-NFT-Treasury/
-├── public/               # Static files
-├── src/
-│   ├── assets/           # Images, logos, and media
-│   ├── components/       # Reusable React components
-│   ├── pages/            # Page-level components (e.g., Home, Dashboard)
-│   ├── utils/            # Utility functions
-│   ├── App.tsx           # Main app wrapper
-│   └── main.tsx          # Entry point
-├── scripts/              # Blockchain deployment and interaction scripts
-├── cert/                 # SSL certificate files (key.pem, cert.pem)
-├── .eslintrc             # ESLint configuration
-├── tsconfig.json         # TypeScript configuration
-├── vite.config.ts        # Vite server configuration with SSL
-└── package.json
-
-
 ## Setup Instructions
 
 ### 1. Clone the Repository
