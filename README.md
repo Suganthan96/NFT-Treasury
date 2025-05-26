@@ -75,7 +75,6 @@ export default defineConfig({
 
 ### 5. Run the Development Server
 
-bash
 npm run dev
 
 
@@ -85,13 +84,11 @@ Application will run at https://localhost:5173
 
 To run ESLint:
 
-bash
 npm run lint
 
 
 ## Build for Production
 
-bash
 npm run build
 
 
