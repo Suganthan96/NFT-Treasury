@@ -1,91 +1,135 @@
 
-# 🎨 NFT-Treasury
+---
 
-NFT-Treasury is a Vite-powered React + TypeScript project scaffolded to build a decentralized platform for managing and showcasing NFTs. This project is intended as the foundation for a Web3-based treasury system where users can view, mint, and track NFTs in a performant and modular frontend.
+# NFT-Treasury
 
-## 🚀 Tech Stack
+*NFT-Treasury* is a Vite-powered React + TypeScript project designed to serve as a decentralized platform for managing and showcasing NFTs. This project provides a foundational frontend for a Web3-based NFT treasury system where users can view, mint, and track NFTs efficiently.
 
-- **Frontend**: React, TypeScript, Vite
-- **Linting**: ESLint (with recommended TypeScript and React rules)
-- **Styling**: Tailwind CSS (planned)
-- **Smart Contract Integration**: (Planned using Ethers.js / Web3.js)
-- **Wallet Connection**: (Planned with MetaMask via `@web3-react` or `wagmi`)
+## Technology Stack
 
-## 📁 Folder Structure
+* *Frontend*: React, TypeScript, Vite
+* *Linting*: ESLint (configured for TypeScript and React)
+* *Styling*: Tailwind CSS (planned)
+* *Smart Contract Integration*: Planned using Ethers.js or Web3.js
+* *Wallet Connection*: Planned with MetaMask via @web3-react or wagmi
 
-```
+## Folder Structure
+
+
 NFT-Treasury/
 ├── public/               # Static files
 ├── src/
 │   ├── assets/           # Images, logos, and media
 │   ├── components/       # Reusable React components
-│   ├── pages/            # Page-level React components (e.g., Home, Dashboard)
+│   ├── pages/            # Page-level components (e.g., Home, Dashboard)
 │   ├── utils/            # Utility functions
 │   ├── App.tsx           # Main app wrapper
 │   └── main.tsx          # Entry point
-├── scripts/              # Deployment scripts or blockchain interaction
-├── .eslintrc             # ESLint config
-├── tsconfig.json         # TypeScript config
-├── vite.config.ts        # Vite configuration
+├── scripts/              # Blockchain deployment and interaction scripts
+├── cert/                 # SSL certificate files (key.pem, cert.pem)
+├── .eslintrc             # ESLint configuration
+├── tsconfig.json         # TypeScript configuration
+├── vite.config.ts        # Vite server configuration with SSL
 └── package.json
-```
 
-## 🛠️ Setup Instructions
+
+## Setup Instructions
 
 ### 1. Clone the Repository
 
-```bash
+bash
 git clone https://github.com/Suganthan96/NFT-Treasury.git
 cd NFT-Treasury
-```
+
 
 ### 2. Install Dependencies
 
-```bash
+bash
 npm install
-```
 
-### 3. Run the Development Server
 
-```bash
+### 3. Generate and Install SSL Certificate (Optional for HTTPS)
+
+To use https://localhost and avoid MetaMask blocking http connections:
+
+1. *Generate SSL certificate using OpenSSL:*
+
+   bash
+   mkdir cert
+   openssl req -x509 -newkey rsa:2048 -nodes -keyout cert/key.pem -out cert/cert.pem -days 365
+   
+
+2. *Trust the certificate:*
+
+   * On Windows:
+
+     * Double-click cert/cert.pem
+     * Click "Install Certificate"
+     * Select "Local Machine"
+     * Choose "Place all certificates in the following store"
+     * Browse and select "Trusted Root Certification Authorities"
+
+   * On macOS:
+
+     * Open cert/cert.pem in Keychain Access
+     * Set Trust to "Always Trust"
+
+### 4. Configure Vite to Use HTTPS
+
+Edit vite.config.ts to include:
+
+ts
+import fs from 'fs';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  server: {
+    https: {
+      key: fs.readFileSync('./cert/key.pem'),
+      cert: fs.readFileSync('./cert/cert.pem'),
+    },
+    port: 5173,
+  }
+});
+
+
+### 5. Run the Development Server
+
+bash
 npm run dev
-```
 
-Your app should now be running at [http://localhost:5173](http://localhost:5173)
 
-## ✅ Linting
+Application will run at https://localhost:5173
 
-Run the linter with:
+## Linting
 
-```bash
+To run ESLint:
+
+bash
 npm run lint
-```
 
-## 📦 Build for Production
 
-```bash
+## Build for Production
+
+bash
 npm run build
-```
 
-## 🔍 Future Improvements
 
-- Integrate ERC-721 and ERC-1155 support
-- Add MetaMask wallet authentication
-- Display NFT metadata from IPFS or other decentralized storage
-- Implement smart contract interactions
+## Planned Features
 
-## 🤝 Contributing
+* ERC-721 and ERC-1155 support
+* MetaMask wallet authentication
+* Display NFT metadata from decentralized storage (IPFS, Arweave, etc.)
+* Smart contract interaction support
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change or add.
+## Contributing
 
----
+Pull requests are welcome. For significant feature proposals, please open an issue first to discuss changes.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
+
 ---
 
-## ✨ Author
-
-Made with 💻 by [Suganthan](https://github.com/Suganthan96)
