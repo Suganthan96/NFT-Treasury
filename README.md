@@ -17,14 +17,12 @@
 
 ### 1. Clone the Repository
 
-bash
 git clone https://github.com/Suganthan96/NFT-Treasury.git
 cd NFT-Treasury
 
 
 ### 2. Install Dependencies
 
-bash
 npm install
 
 
@@ -75,7 +73,7 @@ export default defineConfig({
 
 ### 5. Run the Development Server
 
-bash
+
 npm run dev
 
 
@@ -85,13 +83,13 @@ Application will run at https://localhost:5173
 
 To run ESLint:
 
-bash
+
 npm run lint
 
 
 ## Build for Production
 
-bash
+
 npm run build
 
 
