@@ -1,4 +1,3 @@
-
 # NFT-Treasury
 
 NFT-Treasury is a Vite-powered React + TypeScript project designed to serve as a decentralized platform for managing and showcasing NFTs. This project provides a foundational frontend for a Web3-based NFT treasury system where users can view, mint, and track NFTs efficiently.
@@ -19,17 +18,17 @@ NFT-Treasury is a Vite-powered React + TypeScript project designed to serve as a
 ```bash
 git clone https://github.com/Suganthan96/NFT-Treasury.git
 cd NFT-Treasury
-````
+
 
 ### 2. Install Dependencies
 
 ```bash
 npm install
 ```
-
 ---
 
 ### 3. Generate and Install SSL Certificate (Optional for HTTPS)
+
 
 To use `https://localhost` and avoid MetaMask blocking HTTP connections:
 
@@ -53,7 +52,8 @@ openssl req -x509 -newkey rsa:2048 -nodes -keyout cert/key.pem -out cert/cert.pe
 * On macOS:
 
   1. Open `cert/cert.pem` in Keychain Access
-  2. Set Trust to Always Trust
+
+To use https://localhost and avoid MetaMask blocking HTTP connections:
 
 ---
 
@@ -75,10 +75,10 @@ export default defineConfig({
   },
 });
 ```
-
 ---
 
 ### 5. Run the Development Server
+
 
 ```bash
 npm run dev
@@ -93,6 +93,7 @@ Application will run at:
 
 To run ESLint:
 
+
 ```bash
 npm run lint
 ```
@@ -100,6 +101,7 @@ npm run lint
 ---
 
 ## Build for Production
+
 
 ```bash
 npm run build
@@ -121,13 +123,13 @@ npm run build
 Pull requests are welcome.
 For significant feature proposals, please open an issue first to discuss changes.
 
+
 ---
+
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
 
-```
 
 You can safely use this version in your project. Let me know if you want to include images, a table of contents, or GitHub badges.
-```
