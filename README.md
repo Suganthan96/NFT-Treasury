@@ -18,13 +18,15 @@ NFT-Treasury is a Vite-powered React + TypeScript project designed to serve as a
 ```bash
 git clone https://github.com/Suganthan96/NFT-Treasury.git
 cd NFT-Treasury
-
+```
+---
 
 ### 2. Install Dependencies
 
 ```bash
 npm install
 ```
+
 ---
 
 ### 3. Generate and Install SSL Certificate (Optional for HTTPS)
