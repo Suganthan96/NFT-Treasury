@@ -24,7 +24,11 @@
 
     /* Add these */
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
   },
   "include": ["src", "scripts", "hardhat-config.js"]
 }
