@@ -75,7 +75,7 @@ export default function Minter() {
       if (!imageRes.ok) throw new Error('Failed to upload image to Pinata');
       const imageData = await imageRes.json();
       const imageCID = imageData.IpfsHash;
-      const imageUrl = `ipfs://${imageCID}`;
+      const imageUrl = `https://gateway.pinata.cloud/ipfs/${imageCID}`;
       setIpfsHash(imageCID);
 
       // 2. Upload metadata to Pinata (via backend)
@@ -95,7 +95,7 @@ export default function Minter() {
       if (!metaRes.ok) throw new Error('Failed to upload metadata to Pinata');
       const metaData = await metaRes.json();
       const metaCID = metaData.IpfsHash;
-      const tokenURI = `ipfs://${metaCID}`;
+      const tokenURI = `https://gateway.pinata.cloud/ipfs/${metaCID}`;
       setIpfsHash(metaCID);
 
       // 3. Mint NFT on blockchain using wagmi (tokenURI is the image IPFS URL)
@@ -185,4 +185,4 @@ export default function Minter() {
       </div>
     </div>
   );
-} 
+}
