@@ -110,6 +110,10 @@ npm run build
 ```
 
 ---
+```bash
+PINATA_JWT=your_api_key_here
+VITE_CONTRACT_ADDRESS=0xd92c6FFB0f70B85AeD6eAA72DBaf149263ebD40f
+---
 
 ## Planned Features
 
