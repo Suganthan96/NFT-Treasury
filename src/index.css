@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+.page {
+  text-align: center;
+  padding: 3rem;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #1e88e5;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+.button:hover {
+  background-color: #1565c0;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 2rem;
+}
+
+.nft-card {
+  background: #1f1f1f;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.nft-image {
+  width: 100%;
+  border-radius: 8px;
+}
