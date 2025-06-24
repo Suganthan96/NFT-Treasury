@@ -7,10 +7,9 @@ import { Alchemy, Network } from "alchemy-sdk";
 import { checkNFTOwnership } from "../utils/checkNFTOwnership";
 import Navbar from "../components/Navbar";
 
-
 const config = {
-  apiKey: "a3RjV4P8B-aBpyEcfKMEgwJ0hBEHTbwJ", // Paste your key here
-  network: Network.ETH_SEPOLIA,   // Or the network you use
+  apiKey: import.meta.env.VITE_ALCHEMY_API_KEY,
+  network: Network.ETH_SEPOLIA,
 };
 const alchemy = new Alchemy(config);
 
@@ -22,7 +21,6 @@ export async function ownsAnyERC721(address: string): Promise<string[]> {
   return erc721s.map(nft => nft.contract.address);
 }
 
-const alchemyApiKey = 'a3RjV4P8B-aBpyEcfKMEgwJ0hBEHTbwJ';
 const userAddress = '0x588F6b3169F60176c1143f8BaB47bCf3DeEbECdc';
 
 async function checkOwnership() {
