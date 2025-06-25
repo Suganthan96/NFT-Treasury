@@ -25,12 +25,12 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
         return _tokenIdCounter.current();
     }
 
-    // ✅ Required override to allow ERC721URIStorage to manage tokenURI
+    //  Required override to allow ERC721URIStorage to manage tokenURI
     function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
         super._burn(tokenId);
     }
 
-    // ✅ Required override to resolve tokenURI from URIStorage
+    //  Required override to resolve tokenURI from URIStorage
     function tokenURI(uint256 tokenId)
         public
         view
@@ -40,7 +40,7 @@ contract MyNFT is ERC721, ERC721URIStorage, Ownable {
         return super.tokenURI(tokenId);
     }
 
-    // ✅ Required for interface support when using multiple inheritance
+    //  Required for interface support when using multiple inheritance
     function supportsInterface(bytes4 interfaceId)
         public
         view

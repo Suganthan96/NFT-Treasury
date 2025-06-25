@@ -1,15 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { useConnectModal } from '@rainbow-me/rainbowkit';
-import { checkNFTOwnership } from "../utils/checkNFTOwnership";
+import { Alchemy, Network } from "alchemy-sdk";
 import "../WalletConnect.css";
+
+const config = {
+  apiKey: import.meta.env.VITE_ALCHEMY_API_KEY,
+  network: Network.ETH_SEPOLIA,
+};
+const alchemy = new Alchemy(config);
+
+async function ownsAnyERC721(address: string): Promise<boolean> {
+  const nfts = await alchemy.nft.getNftsForOwner(address);
+  // Filter for ERC-721 NFTs
+  const erc721s = nfts.ownedNfts.filter(nft => nft.tokenType === "ERC721");
+  return erc721s.length > 0;
+}
 
 const ConnectWallet = () => {
   const navigate = useNavigate();
   const { address, isConnected } = useAccount();
   const { openConnectModal } = useConnectModal();
 
-  // Watch for wallet connection and check NFT ownership
   const handleWalletConnection = async () => {
     if (!isConnected) {
       openConnectModal?.();
@@ -17,13 +29,11 @@ const ConnectWallet = () => {
     }
 
     try {
-      const balance = await checkNFTOwnership(address as string);
-      console.log("🎯 NFT Balance from Contract:", balance);
-
-      if (balance > 0) {
+      const ownsNFT = await ownsAnyERC721(address as string);
+      if (ownsNFT) {
         navigate("/home");
       } else {
-        alert("❌ Access Denied: You do not own the required NFT.");
+        alert("❌ Access Denied: You do not own any ERC-721 NFT.");
       }
     } catch (err) {
       console.error("🚨 NFT check failed:", err);
@@ -31,7 +41,6 @@ const ConnectWallet = () => {
     }
   };
 
-  // Effect to check NFT ownership when wallet is connected
   if (isConnected && address) {
     handleWalletConnection();
   }
