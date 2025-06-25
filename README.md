@@ -108,13 +108,6 @@ npm run lint
 ```bash
 npm run build
 ```
-
----
-```bash
-PINATA_JWT=your_api_key_here
-VITE_CONTRACT_ADDRESS=0xd92c6FFB0f70B85AeD6eAA72DBaf149263ebD40f
----
-
 ## Planned Features
 
 * ERC-721 and ERC-1155 NFT support
@@ -132,6 +125,12 @@ For significant feature proposals, please open an issue first to discuss changes
 
 ---
 
+## APIs
+```bash
+PINATA_JWT=your_pinata_code
+VITE_CONTRACT_ADDRESS=0xd92c6FFB0f70B85AeD6eAA72DBaf149263ebD40f
+VITE_ALCHEMY_API_KEY=your_alchemy_api
+```
 
 ## License
 
