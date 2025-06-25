@@ -114,6 +114,8 @@ npm run build
 * MetaMask wallet authentication
 * Display NFT metadata from decentralized storage (IPFS, Arweave, etc.)
 * Smart contract interaction support
+* Minting NFT
+* Alchemy auth 
 
 ---
 
