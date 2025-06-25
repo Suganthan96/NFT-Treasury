@@ -6,7 +6,7 @@ NFT-Treasury is a Vite-powered React + TypeScript project designed to serve as a
 
 * Frontend: React, TypeScript, Vite
 * Linting: ESLint (configured for TypeScript and React)
-* Styling: Tailwind CSS (planned)
+* Styling: CSS (planned)
 * Smart Contract Integration: Planned using Ethers.js or Web3.js
 * Wallet Connection: Planned with MetaMask via @web3-react or wagmi
 
@@ -110,7 +110,7 @@ npm run build
 ```
 ## Planned Features
 
-* ERC-721 and ERC-1155 NFT support
+* ERC-721 
 * MetaMask wallet authentication
 * Display NFT metadata from decentralized storage (IPFS, Arweave, etc.)
 * Smart contract interaction support
@@ -128,10 +128,13 @@ For significant feature proposals, please open an issue first to discuss changes
 ## APIs
 ```bash
 PINATA_JWT=your_pinata_code
-VITE_CONTRACT_ADDRESS=0xd92c6FFB0f70B85AeD6eAA72DBaf149263ebD40f
+VITE_CONTRACT_ADDRESS=deployed_address
 VITE_ALCHEMY_API_KEY=your_alchemy_api
 ```
-
+## Deployed Minter address(deployed_address)
+```bash
+0xd92c6FFB0f70B85AeD6eAA72DBaf149263ebD40f
+```
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
