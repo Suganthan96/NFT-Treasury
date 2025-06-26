@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { BrowserProvider, parseEther } from "ethers";
 import NFTCard from "../components/NFTcard";
 import "../index.css";
 import { Alchemy, Network } from "alchemy-sdk";
-import { checkNFTOwnership } from "../utils/checkNFTOwnership";
 import Navbar from "../components/Navbar";
 
 const config = {
@@ -19,17 +16,6 @@ export async function ownsAnyERC721(address: string): Promise<string[]> {
   const erc721s = nfts.ownedNfts.filter(nft => nft.tokenType === "ERC721");
   // Return contract addresses of owned ERC-721 NFTs
   return erc721s.map(nft => nft.contract.address);
-}
-
-const userAddress = '0x588F6b3169F60176c1143f8BaB47bCf3DeEbECdc';
-
-async function checkOwnership() {
-  const ownsNFT = await checkNFTOwnership(userAddress);
-  if (ownsNFT) {
-    alert('User owns the NFT!');
-  } else {
-    alert('User does NOT own the NFT.');
-  }
 }
 
 export default function Home() {
