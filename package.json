@@ -21,6 +21,8 @@
     "express": "^4.21.2",
     "form-data": "^4.0.3",
     "formidable": "^3.5.4",
+    "framer-motion": "^12.19.1",
+    "gsap": "^3.13.0",
     "json-rpc-random-id": "^1.0.1",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",
