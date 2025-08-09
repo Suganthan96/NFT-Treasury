@@ -29,6 +29,7 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.5.3",
     "solc": "^0.8.28",
+    "styled-components": "^6.1.19",
     "truffle": "^5.11.5",
     "viem": "^2.31.4",
     "wagmi": "^2.15.6"
