@@ -12,6 +12,8 @@ export interface ChromaItem {
   borderColor?: string;
   gradient?: string;
   url?: string;
+  price?: string;
+  onBuy?: () => void;
 }
 
 export interface ChromaGridProps {
@@ -82,10 +84,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
     });
   };
 
-  const handleCardClick = (url?: string) => {
-    if (url) window.open(url, "_blank", "noopener,noreferrer");
-  };
-
   const handleCardMove: React.MouseEventHandler<HTMLElement> = (e) => {
     const card = e.currentTarget as HTMLElement;
     const rect = card.getBoundingClientRect();
@@ -112,11 +110,9 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           key={i}
           className="chroma-card"
           onMouseMove={handleCardMove}
-          onClick={() => handleCardClick(c.url)}
           style={{
             '--card-border': c.borderColor || 'transparent',
             '--card-gradient': c.gradient,
-            cursor: c.url ? 'pointer' : 'default',
           } as React.CSSProperties}
         >
           <div className="chroma-img-wrapper">
@@ -127,6 +123,51 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
             {c.handle && <span className="handle">{c.handle}</span>}
             <p className="role">{c.subtitle}</p>
             {c.location && <span className="location">{c.location}</span>}
+            {c.price && (
+              <div style={{ 
+                marginTop: '0.5rem', 
+                fontSize: '1.2rem', 
+                fontWeight: 'bold', 
+                color: '#10B981' 
+              }}>
+                {c.price} ETH
+              </div>
+            )}
+            {c.onBuy && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  c.onBuy?.();
+                }}
+                className="buy-btn"
+                style={{
+                  marginTop: '0.75rem',
+                  padding: '0.6rem 1.2rem',
+                  background: 'linear-gradient(135deg, #10B981, #059669)',
+                  border: 'none',
+                  borderRadius: '8px',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  width: '100%',
+                  fontSize: '0.95rem',
+                  boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(16, 185, 129, 0.4)';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #059669, #047857)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(16, 185, 129, 0.3)';
+                  e.currentTarget.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                }}
+              >
+                Buy Now
+              </button>
+            )}
           </footer>
         </article>
       ))}

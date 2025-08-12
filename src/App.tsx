@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Minter from "./pages/Minter";
 import Profile from "./pages/Profile";
+import Membership from "./pages/Membership";
+import Discord from "./pages/Discord";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path="/Minter" element={<Minter />} />
         <Route path="/About" element={<About />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/Membership" element={<Membership />} />
+        <Route path="/Discord" element={<Discord />} />
       </Routes>
     </Router>
   );

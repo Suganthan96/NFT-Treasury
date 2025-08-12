@@ -87,3 +87,60 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Membership tier card styles */
+.tier-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tier-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Badge animation */
+@keyframes badgeGlow {
+  0%, 100% { 
+    box-shadow: 0 0 5px currentColor; 
+  }
+  50% { 
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; 
+  }
+}
+
+.badge-owned {
+  animation: badgeGlow 2s ease-in-out infinite;
+}
+
+/* Membership status indicators */
+.membership-status {
+  position: relative;
+  overflow: hidden;
+}
+
+.membership-status::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.membership-status:hover::before {
+  animation: shimmer 1.5s ease-in-out;
+  opacity: 1;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}

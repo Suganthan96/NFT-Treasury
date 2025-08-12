@@ -1,4 +1,6 @@
 import Navbar from "../components/Navbar";
+import MembershipDashboard from "../components/MembershipDashboard";
+import DiscordAccess from "../components/DiscordAccess";
 import { useNavigate } from "react-router-dom";
 import { useAccount } from 'wagmi';
 import { useState } from "react";
@@ -78,7 +80,18 @@ export default function Profile() {
           </button>
         </div>
       </div>
+      
       <div className="content-wrapper">
+        {/* Membership Dashboard */}
+        <div style={{ marginBottom: '3rem' }}>
+          <MembershipDashboard />
+        </div>
+
+        {/* Discord Access Section */}
+        <div style={{ marginBottom: '3rem' }}>
+          <DiscordAccess />
+        </div>
+        
         <div className="membership-section">
             <h2 className="membership-title">Become a Premium Member</h2>
             <p className="membership-description">
@@ -116,4 +129,4 @@ export default function Profile() {
       </div>
     </div>
   );
-} 
+}
