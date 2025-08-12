@@ -14,6 +14,8 @@ export interface ChromaItem {
   url?: string;
   price?: string;
   onBuy?: () => void;
+  isLoading?: boolean;
+  isPurchased?: boolean;
 }
 
 export interface ChromaGridProps {
@@ -137,35 +139,93 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  c.onBuy?.();
+                  if (!c.isLoading && !c.isPurchased) {
+                    c.onBuy?.();
+                  }
                 }}
+                disabled={c.isLoading || c.isPurchased}
                 className="buy-btn"
                 style={{
                   marginTop: '0.75rem',
                   padding: '0.6rem 1.2rem',
-                  background: 'linear-gradient(135deg, #10B981, #059669)',
+                  background: c.isPurchased 
+                    ? 'linear-gradient(135deg, #6B7280, #4B5563)' 
+                    : c.isLoading 
+                      ? 'linear-gradient(135deg, #F59E0B, #D97706)'
+                      : 'linear-gradient(135deg, #10B981, #059669)',
                   border: 'none',
                   borderRadius: '8px',
                   color: 'white',
                   fontWeight: 'bold',
-                  cursor: 'pointer',
+                  cursor: c.isLoading || c.isPurchased ? 'not-allowed' : 'pointer',
                   transition: 'all 0.3s ease',
                   width: '100%',
                   fontSize: '0.95rem',
-                  boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)'
+                  boxShadow: c.isPurchased 
+                    ? '0 2px 8px rgba(107, 114, 128, 0.3)'
+                    : c.isLoading 
+                      ? '0 2px 8px rgba(245, 158, 11, 0.3)'
+                      : '0 2px 8px rgba(16, 185, 129, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(16, 185, 129, 0.4)';
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #059669, #047857)';
+                  if (!c.isLoading && !c.isPurchased) {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 4px 16px rgba(16, 185, 129, 0.4)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #059669, #047857)';
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(16, 185, 129, 0.3)';
-                  e.currentTarget.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                  if (!c.isLoading && !c.isPurchased) {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px rgba(16, 185, 129, 0.3)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #10B981, #059669)';
+                  }
                 }}
               >
-                Buy Now
+                {c.isPurchased ? (
+                  <>
+                    <span>✓</span>
+                    <span>Purchased</span>
+                  </>
+                ) : c.isLoading ? (
+                  <>
+                    <svg
+                      className="animate-spin"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        strokeDasharray="32"
+                        strokeDashoffset="32"
+                        opacity="0.3"
+                      />
+                      <path
+                        d="M12 2a10 10 0 0 1 10 10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span>Minting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>🛒</span>
+                    <span>Buy Now</span>
+                  </>
+                )}
               </button>
             )}
           </footer>

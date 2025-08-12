@@ -39,8 +39,34 @@ export default function MembershipGatedFeature({
       }
 
       try {
+        // Check BitBadges first
         const hasRequiredBadge = await hasBitBadge(address, requiredTierData.collectionId, requiredTierData.badgeId);
-        setHasAccess(hasRequiredBadge);
+        
+        // For Gold tier, also check webhook-activated benefits
+        let hasWebhookBenefits = false;
+        if (requiredTier === 'Gold') {
+          try {
+            const response = await fetch(`http://localhost:3001/api/gold-benefits/${address}`);
+            const benefitsData = await response.json();
+            hasWebhookBenefits = benefitsData.hasGoldBenefits;
+            console.log('🔍 Webhook Gold benefits check:', hasWebhookBenefits, 'for address:', address);
+          } catch (error) {
+            console.log('⚠️ Could not check webhook benefits:', error);
+          }
+        }
+        
+        // Grant access if either BitBadges OR webhook benefits are active
+        const finalAccess = hasRequiredBadge || hasWebhookBenefits;
+        setHasAccess(finalAccess);
+        
+        console.log('🎯 Access check result:', {
+          requiredTier,
+          address,
+          bitbadges: hasRequiredBadge,
+          webhook: hasWebhookBenefits,
+          finalAccess
+        });
+        
       } catch (error) {
         console.error('Error checking badge access:', error);
         setHasAccess(false);
