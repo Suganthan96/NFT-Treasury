@@ -1,0 +1,457 @@
+/* Enhanced Membership Page with Dark Blue Theme */
+.membership-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.membership-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  font-weight: 800;
+}
+
+.membership-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+  box-shadow: var(--shadow-glow);
+}
+
+.membership-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Enhanced Current Status Section */
+.current-status {
+  background: var(--gradient-card);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2.5rem;
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.current-status::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  opacity: 0.8;
+}
+
+.current-status h2 {
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.status-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.nft-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background: var(--gradient-primary);
+  border-radius: 20px;
+  min-width: 140px;
+  position: relative;
+  box-shadow: var(--shadow-blue);
+}
+
+.nft-count::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-primary);
+  border-radius: 22px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.nft-count .count {
+  font-size: 3rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nft-count .label {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.current-tier h3 {
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+}
+
+.badge-status {
+  font-size: 1.125rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.badge-status.claimed {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+  border: 1px solid #22c55e;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.2);
+}
+
+.badge-status.unclaimed {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fbbf24;
+  border: 1px solid #fbbf24;
+  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.2);
+}
+
+.no-tier {
+  color: var(--text-muted);
+}
+
+.no-tier h3 {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* Enhanced Next Tier Section */
+.next-tier {
+  background: rgba(0, 102, 255, 0.1);
+  border: 1px solid var(--primary-blue);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.next-tier::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+}
+
+.next-tier h3 {
+  color: var(--primary-blue-light);
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.next-tier p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* Enhanced Tiers Overview */
+.tiers-overview h2 {
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.tier-card {
+  background: var(--gradient-card);
+  border-radius: 24px;
+  border: 1px solid var(--border-secondary);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(20px);
+  position: relative;
+}
+
+.tier-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hover);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tier-card:hover::before {
+  opacity: 1;
+}
+
+.tier-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-blue-hover);
+  border-color: var(--primary-blue);
+}
+
+.tier-card.current {
+  border-width: 2px;
+  box-shadow: var(--shadow-blue);
+  transform: scale(1.02);
+}
+
+.tier-card.current::after {
+  content: 'CURRENT TIER';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.tier-card.locked {
+  opacity: 0.6;
+  filter: grayscale(0.3);
+}
+
+.tier-header {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  position: relative;
+}
+
+.tier-header h3 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.tier-requirement {
+  font-size: 1rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.tier-benefits {
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+.tier-benefits h4 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tier-benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tier-benefits li {
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 2rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.tier-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.tier-status {
+  padding: 2rem;
+  border-top: 1px solid var(--border-secondary);
+  text-align: center;
+}
+
+.claim-button {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-blue);
+  position: relative;
+  overflow: hidden;
+}
+
+.claim-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.claim-button:hover::before {
+  left: 100%;
+}
+
+.claim-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-blue-hover);
+}
+
+.claim-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.badge-claimed {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Loading and Error States */
+.loading {
+  text-align: center;
+  color: var(--primary-blue);
+  font-size: 1.25rem;
+  padding: 3rem;
+  background: var(--gradient-card);
+  border-radius: 20px;
+  border: 1px solid var(--border-primary);
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(20px);
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  .tiers-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .membership-content {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .membership-header {
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .membership-header h1 {
+    font-size: 2rem;
+  }
+
+  .status-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .tiers-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .current-status,
+  .tier-card {
+    padding: 1.5rem;
+  }
+
+  .membership-content {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+
+  .current-status,
+  .tier-card {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .nft-count {
+    padding: 1.5rem;
+    min-width: 120px;
+  }
+
+  .nft-count .count {
+    font-size: 2.5rem;
+  }
+
+  .claim-button {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+}
