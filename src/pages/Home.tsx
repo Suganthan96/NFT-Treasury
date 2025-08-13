@@ -38,6 +38,193 @@ export default function Home() {
   const [purchasedNFTs, setPurchasedNFTs] = useState<Set<string>>(new Set());
   const [membershipStatus, setMembershipStatus] = useState<{[key: string]: boolean}>({});
   const [membershipLoading, setMembershipLoading] = useState(true);
+  const [goldAnalytics, setGoldAnalytics] = useState<any>(null);
+  const [
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    , setGoldAirdropHistory] = useState<any[]>([]);
+  const [goldVipEvents, setGoldVipEvents] = useState<any[]>([]);
 
   const { writeContract, isSuccess, data: txData, error } = useWriteContract();
 
@@ -48,6 +235,12 @@ export default function Home() {
         try {
           const status = await getUserMembershipStatus(address, nftCount);
           setMembershipStatus(status.ownedBadges);
+          
+          // Load Gold analytics if user is Gold member
+          if (status.ownedBadges['Gold']) {
+            await loadGoldAnalytics();
+            await loadGoldVipEvents();
+          }
         } catch (error) {
           console.error('Error checking membership:', error);
         }
@@ -57,6 +250,32 @@ export default function Home() {
     
     checkMembership();
   }, [address, isConnected, nftCount]);
+
+  // Load Gold member analytics
+  const loadGoldAnalytics = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/gold-analytics/${address}`);
+      if (response.ok) {
+        const analytics = await response.json();
+        setGoldAnalytics(analytics);
+      }
+    } catch (error) {
+      console.error('Error loading Gold analytics:', error);
+    }
+  };
+
+  // Load Gold VIP Events
+  const loadGoldVipEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/gold-vip-events');
+      if (response.ok) {
+        const events = await response.json();
+        setGoldVipEvents(events);
+      }
+    } catch (error) {
+      console.error('Error loading Gold VIP events:', error);
+    }
+  };
 
   // Handle successful NFT minting
   useEffect(() => {
@@ -68,8 +287,53 @@ export default function Home() {
     }
   }, [isSuccess, txData, selectedNFT]);
 
-  // Check if user has Silver or Gold access
-  const hasPremiumAccess = membershipStatus['Silver'] || membershipStatus['Gold'];
+  // Gold exclusive NFTs - only visible to Gold members
+  const goldExclusiveNFTs: ChromaItem[] = [
+    {
+      title: "Gray Skull Ape",
+      subtitle: "Gold VIP Exclusive",
+      image: "/gold-ape-1.png",
+      borderColor: "#FFD700",
+      gradient: "linear-gradient(145deg,#FFD700,#FFA500)",
+      price: "0.15", // Premium pricing for exclusive apes
+      onBuy: () => handleBuyNFT("Gray Skull Ape", "/gold-ape-1.png", "0.15"),
+      isLoading: isBuying && selectedNFT === "Gray Skull Ape",
+      isPurchased: purchasedNFTs.has("Gray Skull Ape"),
+    },
+    {
+      title: "Pixel Vision Ape",
+      subtitle: "Gold VIP Exclusive",
+      image: "/gold-pixel-ape.png",
+      borderColor: "#00FF88",
+      gradient: "linear-gradient(145deg,#00FF88,#00CC6A)",
+      price: "0.18",
+      onBuy: () => handleBuyNFT("Pixel Vision Ape", "/gold-pixel-ape.png", "0.18"),
+      isLoading: isBuying && selectedNFT === "Pixel Vision Ape",
+      isPurchased: purchasedNFTs.has("Pixel Vision Ape"),
+    },
+    {
+      title: "Fire Neon Ape",
+      subtitle: "Gold VIP Exclusive",
+      image: "/gold-fire-ape.png",
+      borderColor: "#FF4500",
+      gradient: "linear-gradient(145deg,#FF4500,#FF6B35)",
+      price: "0.25",
+      onBuy: () => handleBuyNFT("Fire Neon Ape", "/gold-fire-ape.png", "0.25"),
+      isLoading: isBuying && selectedNFT === "Fire Neon Ape",
+      isPurchased: purchasedNFTs.has("Fire Neon Ape"),
+    },
+    {
+      title: "Voxel Tech Ape",
+      subtitle: "Gold VIP Exclusive",
+      image: "/gold-voxel-ape.png",
+      borderColor: "#FF1493",
+      gradient: "linear-gradient(145deg,#FF1493,#DC143C)",
+      price: "0.30",
+      onBuy: () => handleBuyNFT("Voxel Tech Ape", "/gold-voxel-ape.png", "0.30"),
+      isLoading: isBuying && selectedNFT === "Voxel Tech Ape",
+      isPurchased: purchasedNFTs.has("Voxel Tech Ape"),
+    },
+  ];
 
   const handleBuyNFT = async (nftTitle: string, nftImage: string, price: string) => {
     if (!isConnected || !address) {
@@ -77,11 +341,19 @@ export default function Home() {
       return;
     }
     
+    // Apply Gold member discount
+    const isGoldMember = membershipStatus['Gold'];
+    const discountedPrice = isGoldMember ? (parseFloat(price) * 0.7).toFixed(2) : price; // 30% discount
+    
+    if (isGoldMember) {
+      console.log(`🥇 Gold Member Discount Applied: ${price} ETH → ${discountedPrice} ETH`);
+    }
+    
     setIsBuying(true);
     setSelectedNFT(nftTitle);
     
     try {
-      console.log(`🛒 Starting NFT purchase: ${nftTitle}`);
+      console.log(`🛒 Starting NFT purchase: ${nftTitle} (${isGoldMember ? 'Gold Price: ' + discountedPrice : 'Regular Price: ' + price} ETH)`);
       
       // Step 1: First upload the image to IPFS if it's a local file
       let imageUrl = nftImage;
@@ -112,15 +384,18 @@ export default function Home() {
         console.log(`✅ Image uploaded to IPFS: ${imageUrl}`);
       }
       
-      // Step 2: Create metadata for the NFT
+      // Step 2: Create metadata for the NFT with Gold member benefits
       const metadata = {
         name: nftTitle,
-        description: `Premium ${nftTitle} NFT from the NFL collection - Price: ${price} ETH`,
+        description: `Premium ${nftTitle} NFT from the NFL collection - ${isGoldMember ? `Gold Member Price: ${discountedPrice} ETH (30% discount)` : `Price: ${price} ETH`}`,
         image: imageUrl,
         attributes: [
           { trait_type: "Collection", value: "NFL Premium" },
-          { trait_type: "Price", value: `${price} ETH` },
-          { trait_type: "Rarity", value: "Legendary" },
+          { trait_type: "Original Price", value: `${price} ETH` },
+          { trait_type: "Purchase Price", value: `${discountedPrice} ETH` },
+          { trait_type: "Member Tier", value: isGoldMember ? "Gold VIP" : "Standard" },
+          { trait_type: "Discount Applied", value: isGoldMember ? "30%" : "None" },
+          { trait_type: "Rarity", value: isGoldMember ? "Gold Exclusive" : "Standard" },
           { trait_type: "Purchased Date", value: new Date().toISOString().split('T')[0] }
         ],
       };
@@ -356,7 +631,7 @@ export default function Home() {
     <div className="page modern-bg">
       <Navbar />
       <div className="content-wrapper">
-        <BlurText text="Welcome to NFT hub" className="home-title" animateBy="words" direction="top" />
+        <BlurText text="NFT Treasury - Tier Collections" className="home-title" animateBy="words" direction="top" />
         
         {/* Wallet Connection */}
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
@@ -373,234 +648,80 @@ export default function Home() {
           )}
         </div>
 
-        <ChromaGrid items={nftCards} className="nft-grid" />
-        
-        {/* Premium NFT Section - Silver+ Members Only */}
-        <div style={{ marginTop: '4rem' }}>
-          {/* Show premium NFTs only to Silver/Gold members */}
-          {isConnected && hasPremiumAccess ? (
-            <div>
-              <BlurText 
-                text="🌟 Premium Collection" 
-                className="home-title" 
-                animateBy="words" 
-                direction="top" 
-              />
-              <div style={{ 
-                textAlign: 'center', 
-                marginBottom: '2rem',
-                padding: '1rem',
-                background: 'linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(255, 215, 0, 0.1))',
-                borderRadius: '12px',
-                border: '1px solid rgba(192, 192, 192, 0.3)'
-              }}>
-                <p style={{ 
-                  color: '#C0C0C0', 
-                  fontSize: '1.2rem',
-                  marginBottom: '0.5rem' 
-                }}>
-                  ✨ Exclusive Premium NFTs - Silver & Gold Members Only
-                </p>
-                <p style={{ 
-                  color: '#FFD700', 
-                  fontSize: '1rem',
-                  fontWeight: 'bold'
-                }}>
-                  🎯 Higher rarity • 💎 Limited editions • 🚀 Priority access
-                </p>
-              </div>
-              <ChromaGrid items={premiumNftCards} className="nft-grid" />
-            </div>
-          ) : (
-            /* Show locked premium section to Bronze/non-members */
-            <div style={{ 
-              textAlign: 'center',
-              padding: '3rem 2rem',
-              background: 'linear-gradient(135deg, rgba(100,100,100,0.1), rgba(50,50,50,0.1))',
-              borderRadius: '20px',
-              border: '2px dashed rgba(100,100,100,0.3)',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              {/* Blurred background preview */}
-              <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                filter: 'blur(8px)',
-                opacity: 0.3,
-                zIndex: 0
-              }}>
-                <ChromaGrid items={premiumNftCards.slice(0, 3)} className="nft-grid" />
-              </div>
-              
-              {/* Lock overlay */}
-              <div style={{ 
-                position: 'relative', 
-                zIndex: 1,
-                background: 'rgba(0,0,0,0.8)',
-                borderRadius: '16px',
-                padding: '2rem',
-                backdropFilter: 'blur(10px)'
-              }}>
-                <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔒</div>
-                <h3 style={{ 
-                  color: 'white', 
-                  fontSize: '2rem',
-                  marginBottom: '1rem' 
-                }}>
-                  Premium Collection Locked
-                </h3>
-                <p style={{ 
-                  color: '#ccc', 
-                  fontSize: '1.1rem',
-                  marginBottom: '1.5rem',
-                  maxWidth: '500px',
-                  margin: '0 auto 1.5rem'
-                }}>
-                  Exclusive high-value NFTs with rare traits and limited editions. 
-                  Only available to Silver and Gold members.
-                </p>
-                
-                <div style={{ 
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                  gap: '1rem',
-                  marginBottom: '2rem',
-                  maxWidth: '600px',
-                  margin: '0 auto 2rem'
-                }}>
-                  <div style={{
-                    background: 'rgba(192, 192, 192, 0.1)',
-                    border: '1px solid rgba(192, 192, 192, 0.3)',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    textAlign: 'center'
-                  }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🥈</div>
-                    <div style={{ color: '#C0C0C0', fontWeight: 'bold' }}>Silver Tier</div>
-                    <div style={{ color: '#888', fontSize: '0.9rem' }}>Own 3+ NFTs</div>
-                  </div>
-                  <div style={{
-                    background: 'rgba(255, 215, 0, 0.1)',
-                    border: '1px solid rgba(255, 215, 0, 0.3)',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    textAlign: 'center'
-                  }}>
-                    <div style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>🥇</div>
-                    <div style={{ color: '#FFD700', fontWeight: 'bold' }}>Gold Tier</div>
-                    <div style={{ color: '#888', fontSize: '0.9rem' }}>Own 5+ NFTs</div>
-                  </div>
-                </div>
-
-                <div style={{ 
-                  color: '#888', 
-                  fontSize: '1rem',
-                  marginBottom: '1.5rem' 
-                }}>
-                  You currently own <strong style={{ color: '#10B981' }}>{nftCount}</strong> NFTs
-                  {nftCount < 3 && (
-                    <div style={{ marginTop: '0.5rem', color: '#FFA500' }}>
-                      You need {3 - nftCount} more NFT{3 - nftCount > 1 ? 's' : ''} for Silver access
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => window.location.href = '/membership'}
-                  style={{
-                    padding: '1rem 2rem',
-                    background: 'linear-gradient(135deg, #C0C0C0, #FFD700)',
-                    border: 'none',
-                    borderRadius: '8px',
-                    color: 'white',
-                    fontSize: '1.1rem',
-                    fontWeight: 'bold',
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s'
-                  }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                >
-                  🚀 Upgrade to Premium Membership
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-        
-        {/* Gold VIP Dashboard - Webhook-Powered Benefits */}
-        <div style={{ marginTop: '4rem' }}>
-          <MembershipGatedFeature 
-            requiredTier="Gold" 
-            featureName="Gold VIP Dashboard"
-            showPreview={true}
-          >
-            <GoldVIPDashboard />
-          </MembershipGatedFeature>
-        </div>
-        
-        {/* Transaction Status */}
-        {isSuccess && txData && (
+        {/* BRONZE TIER SECTION */}
+        <div style={{ marginTop: '3rem' }}>
           <div style={{ 
-            marginTop: '2rem', 
-            padding: '1rem', 
-            background: '#10B981', 
-            borderRadius: '8px',
-            textAlign: 'center',
-            maxWidth: '600px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}>
-            <p style={{ margin: '0 0 0.5rem 0', fontWeight: 'bold', color: 'white' }}>
-              NFT Purchase Successful!
-            </p>
-            <a
-              href={`https://sepolia.etherscan.io/tx/${txData}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: 'white', textDecoration: 'underline' }}
-            >
-              View Transaction on Etherscan
-            </a>
-          </div>
-        )}
-        
-        {error && (
-          <div style={{ 
-            marginTop: '2rem',
-            color: '#ef4444', 
+            textAlign: 'center', 
+            marginBottom: '2rem',
             padding: '1rem',
-            background: '#2a1f1f',
-            borderRadius: '8px',
-            border: '1px solid #ef4444',
-            textAlign: 'center',
-            maxWidth: '600px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
+            background: 'rgba(205, 127, 50, 0.1)',
+            border: '2px solid #CD7F32',
+            borderRadius: '16px'
           }}>
-            Transaction failed: {(error as Error).message}
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥉</div>
+            <h2 style={{ color: '#CD7F32', fontSize: '1.8rem', margin: 0 }}>
+              Bronze Tier NFTs
+            </h2>
+          </div>
+          <ChromaGrid items={nftCards} className="nft-grid" />
+        </div>
+
+        {/* SILVER TIER SECTION */}
+        {(membershipStatus['Silver'] || membershipStatus['Gold']) && (
+          <div style={{ marginTop: '4rem' }}>
+            <div style={{ 
+              textAlign: 'center', 
+              marginBottom: '2rem',
+              padding: '1rem',
+              background: 'rgba(192, 192, 192, 0.1)',
+              border: '2px solid #C0C0C0',
+              borderRadius: '16px'
+            }}>
+              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥈</div>
+              <h2 style={{ color: '#C0C0C0', fontSize: '1.8rem', margin: 0 }}>
+                Silver Tier NFTs
+              </h2>
+            </div>
+            <ChromaGrid items={premiumNftCards} className="nft-grid" />
           </div>
         )}
-        
-        {isBuying && selectedNFT && (
-          <div style={{ 
+
+        {/* GOLD TIER SECTION */}
+        {membershipStatus['Gold'] && (
+          <div style={{ marginTop: '4rem' }}>
+            <div style={{ 
+              textAlign: 'center', 
+              marginBottom: '2rem',
+              padding: '1rem',
+              background: 'rgba(255, 215, 0, 0.1)',
+              border: '2px solid #FFD700',
+              borderRadius: '16px'
+            }}>
+              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥇</div>
+              <h2 style={{ color: '#FFD700', fontSize: '1.8rem', margin: 0 }}>
+                Gold Tier NFTs
+              </h2>
+            </div>
+            <ChromaGrid items={goldExclusiveNFTs} className="nft-grid" />
+          </div>
+        )}
+
+        {/* Loading Overlay */}
+        {isBuying && (
+          <div style={{
             position: 'fixed',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            background: 'rgba(0, 0, 0, 0.9)',
-            color: 'white',
-            padding: '2rem',
-            borderRadius: '12px',
-            textAlign: 'center',
-            zIndex: 1000,
-            border: '2px solid #4F46E5'
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0,0,0,0.8)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+            flexDirection: 'column'
           }}>
-            <div style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>
+            <div style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'white' }}>
               Processing purchase for {selectedNFT}...
             </div>
             <div style={{ 
@@ -609,8 +730,7 @@ export default function Home() {
               border: '4px solid #333',
               borderTop: '4px solid #4F46E5',
               borderRadius: '50%',
-              animation: 'spin 1s linear infinite',
-              margin: '0 auto'
+              animation: 'spin 1s linear infinite'
             }}></div>
           </div>
         )}

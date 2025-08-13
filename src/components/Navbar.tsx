@@ -12,8 +12,6 @@ const Navbar: React.FC = () => {
           <Link className="btn" to="/home">Home</Link>
           <Link className="btn" to="/minter">Minter</Link>
           <Link className="btn" to="/membership">Membership</Link>
-          <Link className="btn" to="/discord">Discord</Link>
-          <Link className="btn" to="/about">About</Link>
           <Link className="btn" to="/profile">Profile</Link>
           <svg className="outline" overflow="visible" width={500} height={60} viewBox="0 0 500 60" xmlns="http://www.w3.org/2000/svg">
             <rect className="rect" pathLength={100} x={0} y={0} width={500} height={60} fill="transparent" strokeWidth={5} />
