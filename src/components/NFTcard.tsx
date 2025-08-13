@@ -36,11 +36,9 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   columns = 3,
   rows = 2,
   damping = 0.45,
-  fadeOut = 0.6,
   ease = "power3.out",
 }) => {
   const rootRef = useRef<HTMLDivElement>(null);
-  const fadeRef = useRef<HTMLDivElement>(null);
   const setX = useRef<SetterFn | null>(null);
   const setY = useRef<SetterFn | null>(null);
   const pos = useRef({ x: 0, y: 0 });
@@ -73,15 +71,10 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
   const handleMove = (e: React.PointerEvent) => {
     const r = rootRef.current!.getBoundingClientRect();
     moveTo(e.clientX - r.left, e.clientY - r.top);
-    gsap.to(fadeRef.current, { opacity: 0, duration: 0.25, overwrite: true });
   };
 
   const handleLeave = () => {
-    gsap.to(fadeRef.current, {
-      opacity: 1,
-      duration: fadeOut,
-      overwrite: true,
-    });
+    // No fade effect needed anymore
   };
 
   const handleCardMove: React.MouseEventHandler<HTMLElement> = (e) => {
@@ -171,8 +164,6 @@ const ChromaGrid: React.FC<ChromaGridProps> = ({
           </footer>
         </article>
       ))}
-      <div className="chroma-overlay" />
-      <div ref={fadeRef} className="chroma-fade" />
     </div>
   );
 };

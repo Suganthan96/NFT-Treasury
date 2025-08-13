@@ -76,9 +76,9 @@ const BlurText: React.FC<BlurTextProps> = ({
   const defaultTo = useMemo(
     () => [
       {
-        filter: 'blur(5px)',
-        opacity: 0.5,
-        y: direction === 'top' ? 5 : -5,
+        filter: 'blur(2px)',
+        opacity: 0.7,
+        y: direction === 'top' ? 3 : -3,
       },
       { filter: 'blur(0px)', opacity: 1, y: 0 },
     ],
@@ -117,12 +117,39 @@ const BlurText: React.FC<BlurTextProps> = ({
             animate={inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
             onAnimationComplete={
-              index === elements.length - 1 ? onAnimationComplete : undefined
+              index === elements.length - 1 
+                ? () => {
+                    // Clear all filters after animation completes
+                    setTimeout(() => {
+                      const spans = ref.current?.querySelectorAll('span');
+                      spans?.forEach(span => {
+                        if (span instanceof HTMLElement) {
+                          span.style.filter = 'none';
+                          span.style.opacity = '1';
+                        }
+                      });
+                    }, 100);
+                    onAnimationComplete?.();
+                  }
+                : undefined
             }
             style={{
               display: 'inline-block',
               willChange: 'transform, filter, opacity',
             }}
+            onAnimationStart={() => {
+              // Ensure clean animation start
+            }}
+            onUpdate={(latest) => {
+              // Force clear filter when animation completes
+              if (latest.filter === 'blur(0px)') {
+                const element = document.querySelector(`[data-blur-span="${index}"]`);
+                if (element instanceof HTMLElement) {
+                  element.style.filter = 'none';
+                }
+              }
+            }}
+            data-blur-span={index}
           >
             {segment === ' ' ? '\u00A0' : segment}
             {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
