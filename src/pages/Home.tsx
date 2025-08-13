@@ -1,5 +1,4 @@
 import ChromaGrid, { ChromaItem } from "../components/NFTcard";
-import BlurText from "../components/BlurText";
 import MembershipGatedFeature from "../components/MembershipGatedFeature";
 import "../index.css";
 import { Alchemy, Network } from "alchemy-sdk";
@@ -238,7 +237,7 @@ export default function Home() {
     <div className="page modern-bg">
       <Navbar />
       <div className="content-wrapper">
-        <BlurText text="Welcome to NFT hub" className="home-title" animateBy="words" direction="top" />
+        <h1 className="home-title">Welcome to NFT hub</h1>
         
         {/* Wallet Connection */}
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
@@ -264,12 +263,7 @@ export default function Home() {
             featureName="Premium NFT Collection"
             showPreview={true}
           >
-            <BlurText 
-              text="Premium Collection" 
-              className="home-title" 
-              animateBy="words" 
-              direction="top" 
-            />
+            <h1 className="home-title">Premium Collection</h1>
             <p style={{ 
               textAlign: 'center', 
               color: '#C0C0C0', 
@@ -289,12 +283,7 @@ export default function Home() {
             featureName="DAO Governance"
             showPreview={true}
           >
-            <BlurText 
-              text="DAO Governance" 
-              className="home-title" 
-              animateBy="words" 
-              direction="top" 
-            />
+            <h1 className="home-title">DAO Governance</h1>
             <div style={{
               background: 'linear-gradient(135deg, #FFD70020, #FFD70010)',
               border: '2px solid #FFD700',
