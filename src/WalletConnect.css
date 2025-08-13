@@ -1,41 +1,175 @@
-/* Full screen background image */
+/* Enhanced Full Screen Background with Dark Blue Theme */
 .gradient-background {
   height: 100vh;
   width: 100%;
-  background-image: url('connect_back.jpg'); /* Replace with actual image path */
+  background: 
+    radial-gradient(circle at 20% 50%, var(--primary-blue) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, var(--secondary-blue) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, var(--primary-blue-light) 0%, transparent 50%),
+    linear-gradient(135deg, var(--dark-bg) 0%, #0a0e1a 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  overflow: hidden;
 }
 
-/* Button container centered on screen */
+.gradient-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('connect_back.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.1;
+  filter: blur(2px);
+}
+
+.gradient-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+      rgba(59, 130, 246, 0.15), 
+      transparent 40%);
+  pointer-events: none;
+}
+
+/* Enhanced Button Container */
 .last {
-  margin-top: 100px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
 }
 
-/* Massive button - Even Bigger! */
+/* Enhanced Massive Button with Glass-morphism */
 .button {
-  background-color: #ff3c3c;
+  background: var(--gradient-primary);
   color: white;
-  font-size: 50px; /* Increased from 12rem */
-  padding: 150px 300px; /* Increased from 100px 200px */
-  border: none;
-  border-radius: 30px; /* Slightly more rounded */
+  font-size: clamp(2rem, 8vw, 4rem);
+  padding: clamp(3rem 6rem, 10vw 15vw, 8rem 12rem);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 32px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.8); /* Bigger shadow */
-  font-weight: bold;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    var(--shadow-blue),
+    0 0 100px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-primary);
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.button:hover::before {
+  left: 100%;
 }
 
 .button:hover {
-  background-color: #c62828;
-  transform: scale(1.02); /* Slight grow effect on hover */
-  box-shadow: 0 0 80px rgba(0, 0, 0, 1); /* Enhanced shadow on hover */
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+  transform: translate(-50%, -50%) scale(1.05);
+  box-shadow: 
+    0 20px 60px rgba(59, 130, 246, 0.4),
+    0 0 150px rgba(59, 130, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+.button:active {
+  transform: translate(-50%, -50%) scale(0.98);
+}
+
+/* Floating particles animation */
+.gradient-background .floating-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-particles::before,
+.floating-particles::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--primary-blue);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite;
+  box-shadow: 0 0 20px currentColor;
+}
+
+.floating-particles::before {
+  top: 20%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.floating-particles::after {
+  top: 60%;
+  right: 20%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-20px) translateX(5px);
+    opacity: 0.7;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .button {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    padding: clamp(2rem 4rem, 8vw 12vw, 5rem 8rem);
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    font-size: 1.25rem;
+    padding: 1.5rem 3rem;
+    border-radius: 16px;
+    letter-spacing: 0.05em;
+  }
 }
