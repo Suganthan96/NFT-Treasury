@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Navbar from '../components/Navbar';
-import BlurText from '../components/BlurText';
 import DiscordAccess from '../components/DiscordAccess';
 import { useMembershipNFTs } from '../hooks/useNFTCount';
 import { 
@@ -174,12 +173,7 @@ export default function Membership() {
     <div className="page modern-bg">
       <Navbar />
       <div className="content-wrapper" style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <BlurText 
-          text="NFT Treasury Membership" 
-          className="home-title" 
-          animateBy="words" 
-          direction="top" 
-        />
+        <h1 className="home-title">NFT Treasury Membership</h1>
 
         {/* Wallet Connection */}
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
