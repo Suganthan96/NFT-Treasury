@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg-primary);
 }
 
 .logo {
@@ -11,11 +12,13 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--accent-blue-glow));
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--accent-blue-glow));
 }
 
 @keyframes logo-spin {
@@ -35,15 +38,107 @@
 
 .card {
   padding: 2em;
+  background: var(--gradient-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-blue);
+  border-color: var(--primary-blue);
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--text-muted);
 }
 
+/* Enhanced modern background with dynamic blue effects */
 .modern-bg {
   min-height: 100vh;
-  background: linear-gradient(135deg, #232526 0%, #414345 100%);
-  /* Optional: add a subtle pattern or overlay for extra style */
-  /* background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 2px, transparent 2px, transparent 20px); */
+  width: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 204, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(26, 37, 64, 0.8) 0%, transparent 80%),
+    linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.modern-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 204, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.modern-bg::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(
+      45deg,
+      transparent 30%,
+      rgba(0, 102, 255, 0.03) 40%,
+      rgba(0, 204, 255, 0.03) 60%,
+      transparent 70%
+    );
+  pointer-events: none;
+  z-index: -1;
+  animation: shimmer 8s ease-in-out infinite;
+}
+
+/* Floating animation for background elements */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  33% { 
+    transform: translateY(-10px) rotate(1deg); 
+  }
+  66% { 
+    transform: translateY(5px) rotate(-1deg); 
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  #root {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 1.5em;
+    margin: 1rem;
+  }
+  
+  .modern-bg::before,
+  .modern-bg::after {
+    animation-duration: 4s;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1em;
+    margin: 0.5rem;
+    border-radius: 16px;
+  }
 }
