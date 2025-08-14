@@ -631,80 +631,187 @@ export default function Home() {
     <div className="page modern-bg">
       <Navbar />
       <div className="content-wrapper">
-        <BlurText text="NFT Treasury - Tier Collections" className="home-title" animateBy="words" direction="top" />
-        
-        {/* Wallet Connection */}
-        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-          <ConnectButton />
-          {isConnected && address && balance && (
-            <div style={{ 
-              marginTop: '1rem', 
-              color: '#10B981', 
-              fontWeight: 'bold',
-              fontSize: '1.1rem'
-            }}>
-              Wallet Balance: {parseFloat(balance.formatted).toFixed(4)} {balance.symbol}
+        {/* Hero Section */}
+        <div className="home-hero">
+          <div className="hero-content">
+            <BlurText text="NFT Treasury" className="hero-main-title" animateBy="words" direction="top" />
+            <p className="hero-subtitle">Discover, Collect, and Trade Premium NFTs across Exclusive Membership Tiers</p>
+            
+            {/* Stats Cards */}
+            <div className="hero-stats">
+              <div className="stat-card">
+                <div className="stat-number">{nftCards.length + premiumNftCards.length + goldExclusiveNFTs.length}</div>
+                <div className="stat-label">Total NFTs</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{nftCount || 0}</div>
+                <div className="stat-label">Your Collection</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">3</div>
+                <div className="stat-label">Membership Tiers</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-number">{Object.values(membershipStatus).filter(Boolean).length}</div>
+                <div className="stat-label">Active Memberships</div>
+              </div>
+            </div>
+
+            {/* Wallet Connection */}
+            <div className="wallet-connection">
+              <ConnectButton />
+              {isConnected && address && balance && (
+                <div className="wallet-info">
+                  <div className="balance-display">
+                    <span className="balance-label">Wallet Balance:</span>
+                    <span className="balance-amount">{parseFloat(balance.formatted).toFixed(4)} {balance.symbol}</span>
+                  </div>
+                  <div className="address-display">
+                    <span className="address-label">Address:</span>
+                    <span className="address-value">{`${address.slice(0, 6)}...${address.slice(-4)}`}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Membership Status Cards */}
+        {isConnected && (
+          <div className="membership-overview">
+            <h3 className="section-title">Your Membership Status</h3>
+            <div className="membership-cards">
+              <div className={`membership-card bronze ${membershipStatus['Bronze'] ? 'active' : 'inactive'}`}>
+                <div className="membership-icon">🥉</div>
+                <div className="membership-name">Bronze Tier</div>
+                <div className="membership-status">{membershipStatus['Bronze'] ? 'Active' : 'Inactive'}</div>
+                <div className="membership-benefits">
+                  <div>• Access to standard NFTs</div>
+                  <div>• Community access</div>
+                </div>
+              </div>
+              <div className={`membership-card silver ${membershipStatus['Silver'] ? 'active' : 'inactive'}`}>
+                <div className="membership-icon">🥈</div>
+                <div className="membership-name">Silver Tier</div>
+                <div className="membership-status">{membershipStatus['Silver'] ? 'Active' : 'Inactive'}</div>
+                <div className="membership-benefits">
+                  <div>• Premium NFT access</div>
+                  <div>• Exclusive events</div>
+                </div>
+              </div>
+              <div className={`membership-card gold ${membershipStatus['Gold'] ? 'active' : 'inactive'}`}>
+                <div className="membership-icon">🥇</div>
+                <div className="membership-name">Gold Tier</div>
+                <div className="membership-status">{membershipStatus['Gold'] ? 'Active' : 'Inactive'}</div>
+                <div className="membership-benefits">
+                  <div>• 30% discount on all NFTs</div>
+                  <div>• Exclusive gold collections</div>
+                  <div>• Priority support</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* NFT Collections */}
+        <div className="nft-collections">
+          {/* BRONZE TIER SECTION */}
+          <div className="tier-section bronze-section">
+            <div className="tier-header">
+              <div className="tier-icon">🥉</div>
+              <div className="tier-content">
+                <h2 className="tier-title">Bronze Tier Collection</h2>
+                <p className="tier-description">Start your NFT journey with our foundational collection</p>
+                <div className="tier-stats">
+                  <span className="tier-count">{nftCards.length} NFTs Available</span>
+                  <span className="tier-access">Open to All</span>
+                </div>
+              </div>
+            </div>
+            <ChromaGrid items={nftCards} className="nft-grid" />
+          </div>
+
+          {/* SILVER TIER SECTION */}
+          {(membershipStatus['Silver'] || membershipStatus['Gold']) ? (
+            <div className="tier-section silver-section">
+              <div className="tier-header">
+                <div className="tier-icon">🥈</div>
+                <div className="tier-content">
+                  <h2 className="tier-title">Silver Tier Collection</h2>
+                  <p className="tier-description">Premium NFTs for verified Silver members</p>
+                  <div className="tier-stats">
+                    <span className="tier-count">{premiumNftCards.length} NFTs Available</span>
+                    <span className="tier-access">Silver+ Members Only</span>
+                  </div>
+                </div>
+              </div>
+              <ChromaGrid items={premiumNftCards} className="nft-grid" />
+            </div>
+          ) : (
+            <div className="tier-section silver-section locked">
+              <div className="tier-header">
+                <div className="tier-icon">🔒</div>
+                <div className="tier-content">
+                  <h2 className="tier-title">Silver Tier Collection</h2>
+                  <p className="tier-description">Unlock premium NFTs with Silver membership</p>
+                  <div className="tier-stats">
+                    <span className="tier-count">{premiumNftCards.length} NFTs Locked</span>
+                    <span className="tier-access">Requires Silver Membership</span>
+                  </div>
+                </div>
+              </div>
+              <div className="locked-content">
+                <div className="lock-icon">🔐</div>
+                <h3>Silver Membership Required</h3>
+                <p>Upgrade to Silver tier to access these exclusive premium NFTs</p>
+                <button className="upgrade-btn">Upgrade to Silver</button>
+              </div>
+            </div>
+          )}
+
+          {/* GOLD TIER SECTION */}
+          {membershipStatus['Gold'] ? (
+            <div className="tier-section gold-section">
+              <div className="tier-header">
+                <div className="tier-icon">🥇</div>
+                <div className="tier-content">
+                  <h2 className="tier-title">Gold Tier Collection</h2>
+                  <p className="tier-description">Ultra-exclusive NFTs with 30% discount for Gold VIPs</p>
+                  <div className="tier-stats">
+                    <span className="tier-count">{goldExclusiveNFTs.length} NFTs Available</span>
+                    <span className="tier-access">Gold VIP Exclusive</span>
+                  </div>
+                </div>
+              </div>
+              <ChromaGrid items={goldExclusiveNFTs} className="nft-grid" />
+            </div>
+          ) : (
+            <div className="tier-section gold-section locked">
+              <div className="tier-header">
+                <div className="tier-icon">🔒</div>
+                <div className="tier-content">
+                  <h2 className="tier-title">Gold Tier Collection</h2>
+                  <p className="tier-description">The most exclusive NFTs with VIP benefits</p>
+                  <div className="tier-stats">
+                    <span className="tier-count">{goldExclusiveNFTs.length} NFTs Locked</span>
+                    <span className="tier-access">Requires Gold VIP Membership</span>
+                  </div>
+                </div>
+              </div>
+              <div className="locked-content">
+                <div className="lock-icon">👑</div>
+                <h3>Gold VIP Membership Required</h3>
+                <p>Unlock the most exclusive NFTs and get 30% discount on all purchases</p>
+                <div className="gold-benefits">
+                  <div>✨ 30% discount on all NFTs</div>
+                  <div>🎯 Exclusive gold collections</div>
+                  <div>🏆 Priority support & early access</div>
+                </div>
+                <button className="upgrade-btn gold">Upgrade to Gold VIP</button>
+              </div>
             </div>
           )}
         </div>
-
-        {/* BRONZE TIER SECTION */}
-        <div style={{ marginTop: '3rem' }}>
-          <div style={{ 
-            textAlign: 'center', 
-            marginBottom: '2rem',
-            padding: '1rem',
-            background: 'rgba(205, 127, 50, 0.1)',
-            border: '2px solid #CD7F32',
-            borderRadius: '16px'
-          }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥉</div>
-            <h2 style={{ color: '#CD7F32', fontSize: '1.8rem', margin: 0 }}>
-              Bronze Tier NFTs
-            </h2>
-          </div>
-          <ChromaGrid items={nftCards} className="nft-grid" />
-        </div>
-
-        {/* SILVER TIER SECTION */}
-        {(membershipStatus['Silver'] || membershipStatus['Gold']) && (
-          <div style={{ marginTop: '4rem' }}>
-            <div style={{ 
-              textAlign: 'center', 
-              marginBottom: '2rem',
-              padding: '1rem',
-              background: 'rgba(192, 192, 192, 0.1)',
-              border: '2px solid #C0C0C0',
-              borderRadius: '16px'
-            }}>
-              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥈</div>
-              <h2 style={{ color: '#C0C0C0', fontSize: '1.8rem', margin: 0 }}>
-                Silver Tier NFTs
-              </h2>
-            </div>
-            <ChromaGrid items={premiumNftCards} className="nft-grid" />
-          </div>
-        )}
-
-        {/* GOLD TIER SECTION */}
-        {membershipStatus['Gold'] && (
-          <div style={{ marginTop: '4rem' }}>
-            <div style={{ 
-              textAlign: 'center', 
-              marginBottom: '2rem',
-              padding: '1rem',
-              background: 'rgba(255, 215, 0, 0.1)',
-              border: '2px solid #FFD700',
-              borderRadius: '16px'
-            }}>
-              <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🥇</div>
-              <h2 style={{ color: '#FFD700', fontSize: '1.8rem', margin: 0 }}>
-                Gold Tier NFTs
-              </h2>
-            </div>
-            <ChromaGrid items={goldExclusiveNFTs} className="nft-grid" />
-          </div>
-        )}
 
         {/* Loading Overlay */}
         {isBuying && (

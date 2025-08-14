@@ -1204,3 +1204,430 @@ body {
     transform: scale(1);
   }
 }
+
+/* Home Page Enhancements */
+.home-hero {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-main-title {
+  font-size: 4rem !important;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  color: #94a3b8;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: rgba(17, 25, 40, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4F46E5, #7C3AED, #EC4899);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stat-number {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.wallet-connection {
+  margin-bottom: 2rem;
+}
+
+.wallet-info {
+  margin-top: 1.5rem;
+  background: rgba(17, 25, 40, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.balance-display,
+.address-display {
+  text-align: center;
+}
+
+.balance-label,
+.address-label {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.balance-amount {
+  color: #10B981;
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: block;
+}
+
+.address-value {
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.membership-overview {
+  margin-bottom: 4rem;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.membership-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.membership-card {
+  background: rgba(17, 25, 40, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.membership-card.active {
+  border-color: #10B981;
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.2);
+}
+
+.membership-card.bronze.active { 
+  border-color: #CD7F32; 
+  box-shadow: 0 20px 60px rgba(205, 127, 50, 0.2);
+}
+
+.membership-card.silver.active { 
+  border-color: #C0C0C0; 
+  box-shadow: 0 20px 60px rgba(192, 192, 192, 0.2);
+}
+
+.membership-card.gold.active { 
+  border-color: #FFD700; 
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+}
+
+.membership-card:hover {
+  transform: translateY(-5px);
+}
+
+.membership-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.membership-name {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.membership-status {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.membership-card.active .membership-status {
+  color: #10B981;
+}
+
+.membership-card.bronze.active .membership-status { color: #CD7F32; }
+.membership-card.silver.active .membership-status { color: #C0C0C0; }
+.membership-card.gold.active .membership-status { color: #FFD700; }
+
+.membership-benefits {
+  text-align: left;
+}
+
+.membership-benefits div {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.nft-collections {
+  margin-bottom: 4rem;
+}
+
+.tier-section {
+  margin-bottom: 4rem;
+}
+
+.tier-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  background: rgba(17, 25, 40, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.bronze-section .tier-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #CD7F32, #B8860B);
+}
+
+.silver-section .tier-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+}
+
+.gold-section .tier-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+}
+
+.tier-icon {
+  font-size: 4rem;
+  flex-shrink: 0;
+}
+
+.tier-content {
+  flex: 1;
+}
+
+.tier-title {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.tier-description {
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.tier-stats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tier-count,
+.tier-access {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.tier-access {
+  color: #10B981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.bronze-section .tier-access { color: #CD7F32; border-color: rgba(205, 127, 50, 0.3); }
+.silver-section .tier-access { color: #C0C0C0; border-color: rgba(192, 192, 192, 0.3); }
+.gold-section .tier-access { color: #FFD700; border-color: rgba(255, 215, 0, 0.3); }
+
+.locked {
+  opacity: 0.7;
+}
+
+.locked-content {
+  background: rgba(17, 25, 40, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.lock-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.locked-content h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.locked-content p {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.gold-benefits {
+  text-align: left;
+  margin: 1.5rem 0;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gold-benefits div {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+.upgrade-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.upgrade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+}
+
+.upgrade-btn.gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000000;
+}
+
+.upgrade-btn.gold:hover {
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .hero-main-title {
+    font-size: 2.5rem !important;
+  }
+  
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .membership-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .tier-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .tier-stats {
+    justify-content: center;
+  }
+  
+  .wallet-info {
+    grid-template-columns: 1fr;
+  }
+}
