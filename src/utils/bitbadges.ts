@@ -53,8 +53,8 @@ export const MEMBERSHIP_TIERS: MembershipTier[] = [
 ];
 
 // BitBadges API base configuration
-const BITBADGES_API_URL = 'https://api.bitbadges.io';
-const BITBADGES_API_KEY = import.meta.env.VITE_BITBADGES_API_KEY || '';
+// const BITBADGES_API_URL = 'https://api.bitbadges.io';
+// const BITBADGES_API_KEY = import.meta.env.VITE_BITBADGES_API_KEY || '';
 
 // Local storage for tracking membership until BitBadges collections are fully set up
 const MEMBERSHIP_STORAGE_KEY = 'nft_treasury_membership_status';

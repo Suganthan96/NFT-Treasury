@@ -16,15 +16,15 @@ export default function DiscordAccess({ compact = false }: DiscordAccessProps) {
   // Discord server info - updated with your actual server
   const DISCORD_INVITE_URL = 'https://discord.gg/x4HPmQEF'; // Your actual invite link
   const DISCORD_SERVER_NAME = 'NFT Treasury server';
-  const DISCORD_SERVER_ID = '1404708871964069999';
+  // const DISCORD_SERVER_ID = '1404708871964069999';
 
   // Role information from your BitBadges setup
-  const DISCORD_ROLES = {
-    BITBADGES: '1404711520151277593',
-    GOLD_MEMBER: '1404710253227937823',
-    NFT_TREASURY_MEMBER: '1404710257250533477',
-    SILVER_MEMBER: '1404710144398463068'
-  };
+  // const DISCORD_ROLES = {
+  //   BITBADGES: '1404711520151277593',
+  //   GOLD_MEMBER: '1404710253227937823',
+  //   NFT_TREASURY_MEMBER: '1404710257250533477',
+  //   SILVER_MEMBER: '1404710144398463068'
+  // };
 
   const handleJoinDiscord = async () => {
     if (!isConnected || !address) {

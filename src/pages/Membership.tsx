@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther } from 'viem';
 import Navbar from '../components/Navbar';

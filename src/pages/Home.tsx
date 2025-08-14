@@ -1,5 +1,5 @@
 import ChromaGrid, { ChromaItem } from "../components/NFTcard";
-import BlurText from "../components/BlurText";
+// import BlurText from "../components/BlurText";
 import AnimatedBackground from "../components/AnimatedBackground";
 import "../index.css";
 import { Alchemy, Network } from "alchemy-sdk";

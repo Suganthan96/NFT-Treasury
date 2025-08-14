@@ -14,12 +14,12 @@ export default function Minter() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', description: '', attr1Name: '', attr1Value: '' });
   const [isMinting, setIsMinting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [txHash, setTxHash] = useState('');
-  const [ipfsHash, setIpfsHash] = useState('');
+  // const [success, setSuccess] = useState(false);
+  // const [txHash, setTxHash] = useState('');
+  // const [ipfsHash, setIpfsHash] = useState('');
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  const { writeContract, isPending, isSuccess, data: txData, error } = useWriteContract();
+  const { writeContract, isSuccess, data: txData, error } = useWriteContract();
 
   const handleImageUpload = (file: File) => {
     if (file.size > 10 * 1024 * 1024) {
@@ -58,9 +58,9 @@ export default function Minter() {
       return;
     }
     setIsMinting(true);
-    setSuccess(false);
-    setTxHash('');
-    setIpfsHash('');
+    // setSuccess(false);
+    // setTxHash('');
+    // setIpfsHash('');
     try {
       // 1. Upload image to Pinata (API endpoint must be implemented in your backend)
       // Updated to use backend server
@@ -76,7 +76,7 @@ export default function Minter() {
       const imageData = await imageRes.json();
       const imageCID = imageData.IpfsHash;
       const imageUrl = `https://gateway.pinata.cloud/ipfs/${imageCID}`;
-      setIpfsHash(imageCID);
+      // setIpfsHash(imageCID);
 
       // 2. Upload metadata to Pinata (via backend)
       const metadata = {
@@ -96,7 +96,7 @@ export default function Minter() {
       const metaData = await metaRes.json();
       const metaCID = metaData.IpfsHash;
       const tokenURI = `https://gateway.pinata.cloud/ipfs/${metaCID}`;
-      setIpfsHash(metaCID);
+      // setIpfsHash(metaCID);
 
       // 3. Mint NFT on blockchain using wagmi (tokenURI is the image IPFS URL)
       writeContract({
