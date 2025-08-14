@@ -280,7 +280,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="home-hero">
           <div className="hero-content">
-            <BlurText text="NFT Treasury" className="hero-main-title" animateBy="words" direction="top" />
+            <h1 className="hero-main-title">NFT Treasury</h1>
             <p className="hero-subtitle">Discover, Collect, and Trade Premium NFTs in the Digital Marketplace</p>
             
             {/* Stats Cards */}
