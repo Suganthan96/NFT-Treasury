@@ -62,69 +62,250 @@ export default function Profile() {
   };
 
   return (
-    <div className="page modern-bg">
+    <div className="profile-page">
       <Navbar />
-      <div className="user-info-container">
-        <div className="user-avatar">
-          <img src="user.png" alt="User" className="avatar-img" />
-        </div>
-        <div className="user-details">
-          <p className="user-name">NFT Collector</p>
-          <p className="wallet-address">{isConnected ? address : "Not connected"}</p>
-          <div className="coin-counter">
-            <span className="coin-icon">🪙</span>
-            <span className="coin-count">{coins}</span>
-          </div>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
-        </div>
-      </div>
       
-      <div className="content-wrapper">
-        {/* Membership Dashboard */}
-        <div style={{ marginBottom: '3rem' }}>
-          <MembershipDashboard />
+      <div className="profile-container">
+        <div className="profile-header">
+          <h1 className="profile-title">My Profile</h1>
+          <p className="profile-subtitle">Manage your NFT collection and account settings</p>
         </div>
 
-        {/* Discord Access Section */}
-        <div style={{ marginBottom: '3rem' }}>
-          <DiscordAccess />
-        </div>
-        
-        <div className="membership-section">
-            <h2 className="membership-title">Become a Premium Member</h2>
-            <p className="membership-description">
-                Unlock exclusive features for just 0.0000001 ETH
-            </p>
-
-            {transactionStatus === 'pending' && (
-                <div className="transaction-status pending">
-                Processing transaction...
-                </div>
-            )}
-            {transactionStatus === 'success' && (
-                <div className="transaction-status success">
-                Membership activated! +1 🪙
-                </div>
-            )}
-            {transactionStatus === 'error' && (
-                <div className="transaction-status error">
-                Transaction failed. Please try again.
-                </div>
-            )}
-
-            <button
-                className="membership-button"
-                onClick={handleMembershipClick}
-                disabled={transactionStatus === 'pending'}
-            >
-                {transactionStatus === 'pending' ? 'Processing...' : 'Pay 0.0000001 ETH'}
+        {/* User Profile Card */}
+        <div className="user-profile-card">
+          <div className="profile-avatar-section">
+            <div className="avatar-container">
+              <img src="user.png" alt="User Avatar" className="user-avatar" />
+              <div className="avatar-status online"></div>
+            </div>
+            <button className="change-avatar-btn">
+              <span className="camera-icon">📷</span>
+              Change Avatar
             </button>
+          </div>
 
-            {showCoinAnimation && (
+          <div className="profile-info-section">
+            <div className="user-details">
+              <h2 className="user-name">NFT Collector</h2>
+              <p className="user-title">Digital Asset Enthusiast</p>
+              
+              <div className="wallet-info">
+                <div className="wallet-status">
+                  <span className="status-indicator connected"></span>
+                  <span className="status-text">
+                    {isConnected ? 'Wallet Connected' : 'Wallet Disconnected'}
+                  </span>
+                </div>
+                {isConnected && address && (
+                  <div className="wallet-address-display">
+                    <span className="address-label">Address:</span>
+                    <code className="wallet-address">{address}</code>
+                    <button className="copy-address-btn" title="Copy address">
+                      📋
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="profile-stats">
+              <div className="stat-item">
+                <div className="stat-icon">🪙</div>
+                <div className="stat-content">
+                  <span className="stat-value">{coins}</span>
+                  <span className="stat-label">Coins</span>
+                </div>
+              </div>
+              
+              <div className="stat-item">
+                <div className="stat-icon">🎨</div>
+                <div className="stat-content">
+                  <span className="stat-value">12</span>
+                  <span className="stat-label">NFTs</span>
+                </div>
+              </div>
+              
+              <div className="stat-item">
+                <div className="stat-icon">⭐</div>
+                <div className="stat-content">
+                  <span className="stat-value">Level 5</span>
+                  <span className="stat-label">Rank</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="profile-actions">
+              <button className="edit-profile-btn">
+                <span className="edit-icon">✏️</span>
+                Edit Profile
+              </button>
+              <button onClick={handleLogout} className="logout-button">
+                <span className="logout-icon">🚪</span>
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="profile-content">
+          {/* Membership Section */}
+          <div className="profile-section">
+            <div className="section-header">
+              <h3 className="section-title">
+                <span className="section-icon">👑</span>
+                Membership Status
+              </h3>
+            </div>
+            
+            <div className="membership-card">
+              <div className="membership-info">
+                <h4>Premium Membership</h4>
+                <p>Unlock exclusive features and benefits</p>
+                
+                {transactionStatus === 'pending' && (
+                  <div className="transaction-status pending">
+                    <div className="loading-spinner"></div>
+                    Processing transaction...
+                  </div>
+                )}
+                {transactionStatus === 'success' && (
+                  <div className="transaction-status success">
+                    <span className="success-icon">✅</span>
+                    Membership activated! +1 🪙
+                  </div>
+                )}
+                {transactionStatus === 'error' && (
+                  <div className="transaction-status error">
+                    <span className="error-icon">❌</span>
+                    Transaction failed. Please try again.
+                  </div>
+                )}
+              </div>
+
+              <div className="membership-pricing">
+                <div className="price-display">
+                  <span className="price-amount">0.0000001</span>
+                  <span className="price-currency">ETH</span>
+                </div>
+                
+                <button
+                  className="membership-upgrade-btn"
+                  onClick={handleMembershipClick}
+                  disabled={transactionStatus === 'pending'}
+                >
+                  {transactionStatus === 'pending' ? (
+                    <>
+                      <div className="loading-spinner"></div>
+                      Processing...
+                    </>
+                  ) : (
+                    <>
+                      <span className="upgrade-icon">⚡</span>
+                      Upgrade Now
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {showCoinAnimation && (
                 <div className="coin-animation">🪙</div>
-            )}
+              )}
+            </div>
+          </div>
+
+          {/* Dashboard Sections */}
+          <div className="profile-section">
+            <div className="section-header">
+              <h3 className="section-title">
+                <span className="section-icon">📊</span>
+                Membership Dashboard
+              </h3>
+            </div>
+            <div className="dashboard-wrapper">
+              <MembershipDashboard />
+            </div>
+          </div>
+
+          <div className="profile-section">
+            <div className="section-header">
+              <h3 className="section-title">
+                <span className="section-icon">💬</span>
+                Discord Access
+              </h3>
+            </div>
+            <div className="discord-wrapper">
+              <DiscordAccess />
+            </div>
+          </div>
+
+          {/* Recent Activity */}
+          <div className="profile-section">
+            <div className="section-header">
+              <h3 className="section-title">
+                <span className="section-icon">🕐</span>
+                Recent Activity
+              </h3>
+            </div>
+            
+            <div className="activity-list">
+              <div className="activity-item">
+                <div className="activity-icon mint">🎨</div>
+                <div className="activity-content">
+                  <p className="activity-title">Minted new NFT</p>
+                  <p className="activity-time">2 hours ago</p>
+                </div>
+                <div className="activity-status success">✅</div>
+              </div>
+              
+              <div className="activity-item">
+                <div className="activity-icon trade">💰</div>
+                <div className="activity-content">
+                  <p className="activity-title">Purchased membership</p>
+                  <p className="activity-time">1 day ago</p>
+                </div>
+                <div className="activity-status success">✅</div>
+              </div>
+              
+              <div className="activity-item">
+                <div className="activity-icon wallet">🔗</div>
+                <div className="activity-content">
+                  <p className="activity-title">Connected wallet</p>
+                  <p className="activity-time">3 days ago</p>
+                </div>
+                <div className="activity-status success">✅</div>
+              </div>
+            </div>
+          </div>
+
+          {/* NFT Collection Preview */}
+          <div className="profile-section">
+            <div className="section-header">
+              <h3 className="section-title">
+                <span className="section-icon">🖼️</span>
+                My NFT Collection
+              </h3>
+              <button className="view-all-btn">View All</button>
+            </div>
+            
+            <div className="nft-grid">
+              <div className="nft-card-mini">
+                <img src="nft1.png" alt="NFT 1" />
+                <p className="nft-name">Cyber Punk #001</p>
+              </div>
+              <div className="nft-card-mini">
+                <img src="nft2.png" alt="NFT 2" />
+                <p className="nft-name">Digital Art #042</p>
+              </div>
+              <div className="nft-card-mini">
+                <img src="nft3.png" alt="NFT 3" />
+                <p className="nft-name">Pixel Art #123</p>
+              </div>
+              <div className="nft-card-mini add-nft">
+                <div className="add-icon">+</div>
+                <p className="add-text">Create New NFT</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
