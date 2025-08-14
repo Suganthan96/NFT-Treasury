@@ -5,8 +5,7 @@ import "../index.css";
 import { Alchemy, Network } from "alchemy-sdk";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount, useBalance, useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 import contractABI from '../abi/abi.json';
 
 const config = {
@@ -28,7 +27,6 @@ export async function ownsAnyERC721(address: string): Promise<string[]> {
 
 export default function Home() {
   const { address, isConnected } = useAccount();
-  const { data: balance } = useBalance({ address });
   const [isBuying, setIsBuying] = useState(false);
   const [selectedNFT, setSelectedNFT] = useState<string>('');
   const [purchasedNFTs, setPurchasedNFTs] = useState<Set<string>>(new Set());
@@ -301,23 +299,6 @@ export default function Home() {
                 <div className="stat-number">24/7</div>
                 <div className="stat-label">Support</div>
               </div>
-            </div>
-
-            {/* Wallet Connection */}
-            <div className="wallet-connection">
-              <ConnectButton />
-              {isConnected && address && balance && (
-                <div className="wallet-info">
-                  <div className="balance-display">
-                    <span className="balance-label">Wallet Balance:</span>
-                    <span className="balance-amount">{parseFloat(balance.formatted).toFixed(4)} {balance.symbol}</span>
-                  </div>
-                  <div className="address-display">
-                    <span className="address-label">Address:</span>
-                    <span className="address-value">{`${address.slice(0, 6)}...${address.slice(-4)}`}</span>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

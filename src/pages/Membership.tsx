@@ -182,22 +182,10 @@ export default function Membership() {
             <p className="membership-subtitle">
               Unlock exclusive features and benefits based on your NFT holdings
             </p>
-            
-            {/* Wallet Connection */}
-            <div className="wallet-connection-section">
-              <ConnectButton />
-              {!isConnected && (
-                <div className="connection-prompt">
-                  <div className="prompt-icon">🔗</div>
-                  <h3>Connect Your Wallet</h3>
-                  <p>Connect your wallet to check your NFT holdings and claim membership badges</p>
-                </div>
-              )}
-            </div>
           </div>
 
-          {isConnected && (
-            <>
+          {/* Always show membership content */}
+          <>
               {/* Current Status Card */}
               <div className="current-status-card">
                 <div className="status-header">
@@ -355,7 +343,6 @@ export default function Membership() {
                 <DiscordAccess />
               </div>
             </>
-          )}
         </div>
       </div>
     </div>
