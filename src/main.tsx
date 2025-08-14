@@ -1,3 +1,4 @@
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -10,7 +11,7 @@ import {
   walletConnectWallet,
   phantomWallet,
 } from '@rainbow-me/rainbowkit/wallets';
-import { WagmiProvider, createConfig } from 'wagmi';
+import { WagmiProvider, createConfig, http } from 'wagmi';
 import { sepolia } from 'wagmi/chains';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -35,6 +36,9 @@ const connectors = connectorsForWallets(
 const config = createConfig({
   connectors,
   chains: [sepolia],
+  transports: {
+    [sepolia.id]: http(),
+  },
 });
 
 const queryClient = new QueryClient();

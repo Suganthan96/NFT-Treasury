@@ -1,102 +1,71 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./Navbar.css";
 
 const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <StyledWrapper>
-      <div className="navbar-logo">NFT Hub</div>
-      <div className="nav">
-        <div className="container">
-          <Link className="btn" to="/home">Home</Link>
-          <Link className="btn" to="/minter">Minter</Link>
-          <Link className="btn" to="/membership">Membership</Link>
-          <Link className="btn" to="/profile">Profile</Link>
-          <svg className="outline" overflow="visible" width={500} height={60} viewBox="0 0 500 60" xmlns="http://www.w3.org/2000/svg">
-            <rect className="rect" pathLength={100} x={0} y={0} width={500} height={60} fill="transparent" strokeWidth={5} />
-          </svg>
+    <nav className="navbar">
+      <div className="navbar-container">
+        {/* Logo */}
+        <div className="navbar-logo">
+          <Link to="/home" onClick={closeMenu}>NFT Treasury</Link>
         </div>
+
+        {/* Hamburger Menu Button */}
+        <button 
+          className={`hamburger ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
+
+        {/* Navigation Menu */}
+        <div className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/home" onClick={closeMenu}>
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/minter" onClick={closeMenu}>
+                Minter
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/membership" onClick={closeMenu}>
+                Membership
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile" onClick={closeMenu}>
+                Profile
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Overlay for mobile menu */}
+        <div 
+          className={`navbar-overlay ${isMenuOpen ? 'active' : ''}`}
+          onClick={closeMenu}
+        ></div>
       </div>
-    </StyledWrapper>
+    </nav>
   );
-}
-
-const StyledWrapper = styled.div`
-  .outline {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-
-  .rect {
-    stroke-dashoffset: 5;
-    stroke-dasharray: 0 0 10 40 10 40;
-    transition: 0.5s;
-    stroke: #fff;
-  }
-
-  .nav {
-    position: relative;
-    width: 500px;
-    height: 60px;
-  }
-
-  .container:hover .outline .rect {
-    transition: 999999s;
-    stroke-dashoffset: 1;
-    stroke-dasharray: 0;
-  }
-
-  .container {
-    position: absolute;
-    inset: 0;
-    background: #bef6;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.5em;
-  }
-
-  .btn {
-    padding: 0.5em 1.5em;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.1s;
-    text-decoration: none;
-    font-size: 1em;
-  }
-
-  .btn:hover {
-    background: #fff3;
-  }
-
-  .btn:nth-child(1):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 2 8 73.3 8 10.7;
-  }
-
-  .btn:nth-child(2):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 12.6 9.5 49.3 9.5 31.6;
-  }
-
-  .btn:nth-child(3):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 24.5 8.5 27.5 8.5 55.5;
-  }
-
-  .btn:nth-child(4):hover ~ svg .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 34.7 6.9 10.2 6.9 76;
-  }
-
-  .btn:hover ~ .outline .rect {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 0 0 10 40 10 40;
-    transition: 0.5s !important;
-  }
-`;
+};
 
 export default Navbar; 

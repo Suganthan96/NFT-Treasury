@@ -120,68 +120,202 @@ export default function Minter() {
   };
 
   return (
-    <div className="page modern-bg">
+    <div className="minter-page">
       <Navbar />
-      <div className="content-wrapper">
-        <ConnectButton />
-        {isConnected && address && (
-          <div className="text-green-400 font-semibold">
-            Connected: {address.slice(0, 6)}...{address.slice(-4)} ({balance?.formatted} {balance?.symbol})
-          </div>
-        )}
-        <form onSubmit={handleMint} className="minter-form">
-          <label>
-            Name:
-            <input type="text" id="name" value={form.name} onChange={handleInputChange} required />
-          </label>
-          <label>
-            Description:
-            <input type="text" id="description" value={form.description} onChange={handleInputChange} required />
-          </label>
-          <label>
-            Image:
-            <input
-              type="file"
-              accept="image/*"
-              ref={imageInputRef}
-              onChange={e => {
-                const files = e.target.files;
-                if (files && files.length > 0) handleImageUpload(files[0]);
-              }}
-            />
-          </label>
-          {imagePreview && (
-            <div>
-              <img src={imagePreview} alt="Preview" style={{ maxWidth: 200 }} />
-              <button type="button" onClick={handleRemoveImage}>Remove</button>
+      
+      <div className="minter-container">
+        <div className="minter-header">
+          <h1 className="minter-title">Create Your NFT</h1>
+          <p className="minter-subtitle">Mint unique digital assets on the blockchain</p>
+        </div>
+
+        {/* Wallet Connection Section */}
+        <div className="wallet-section">
+          <ConnectButton />
+          {isConnected && address && (
+            <div className="wallet-info">
+              <div className="wallet-address">
+                <span className="label">Connected:</span>
+                <span className="address">{address.slice(0, 6)}...{address.slice(-4)}</span>
+              </div>
+              <div className="wallet-balance">
+                <span className="balance">{balance?.formatted} {balance?.symbol}</span>
+              </div>
             </div>
           )}
-          <label>
-            Trait name (optional):
-            <input type="text" id="attr1Name" value={form.attr1Name} onChange={handleInputChange} />
-          </label>
-          <label>
-            Trait value (optional):
-            <input type="text" id="attr1Value" value={form.attr1Value} onChange={handleInputChange} />
-          </label>
-          <button type="submit" disabled={!validateForm() || isMinting}>
-            {isMinting ? 'Minting...' : 'Mint NFT'}
-          </button>
-        </form>
+        </div>
+
+        <div className="minter-content">
+          {/* Preview Section */}
+          <div className="preview-section">
+            <h3>NFT Preview</h3>
+            <div className="nft-preview-card">
+              {imagePreview ? (
+                <div className="image-preview">
+                  <img src={imagePreview} alt="NFT Preview" />
+                  <button 
+                    type="button" 
+                    className="remove-image-btn"
+                    onClick={handleRemoveImage}
+                    title="Remove image"
+                  >
+                    ✕
+                  </button>
+                </div>
+              ) : (
+                <div className="image-placeholder">
+                  <div className="placeholder-icon">🖼️</div>
+                  <p>Upload an image to see preview</p>
+                </div>
+              )}
+              
+              <div className="preview-info">
+                <h4 className="preview-name">{form.name || 'NFT Name'}</h4>
+                <p className="preview-description">{form.description || 'NFT Description'}</p>
+                {form.attr1Name && form.attr1Value && (
+                  <div className="preview-attributes">
+                    <span className="attr-label">{form.attr1Name}:</span>
+                    <span className="attr-value">{form.attr1Value}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Form Section */}
+          <div className="form-section">
+            <h3>NFT Details</h3>
+            <form onSubmit={handleMint} className="minter-form">
+              
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                  Name <span className="required">*</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  className="form-input"
+                  value={form.name} 
+                  onChange={handleInputChange} 
+                  placeholder="Enter NFT name"
+                  required 
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="description" className="form-label">
+                  Description <span className="required">*</span>
+                </label>
+                <textarea 
+                  id="description" 
+                  className="form-textarea"
+                  value={form.description} 
+                  onChange={handleInputChange} 
+                  placeholder="Describe your NFT"
+                  rows={4}
+                  required 
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">
+                  Image <span className="required">*</span>
+                </label>
+                <div className="file-input-wrapper">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    ref={imageInputRef}
+                    className="file-input"
+                    onChange={e => {
+                      const files = e.target.files;
+                      if (files && files.length > 0) handleImageUpload(files[0]);
+                    }}
+                    required
+                  />
+                  <div className="file-input-label">
+                    <span className="file-icon">📁</span>
+                    <span>{selectedImage ? selectedImage.name : 'Choose image file'}</span>
+                    <span className="file-hint">Max size: 10MB</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="attr1Name" className="form-label">
+                    Trait Name <span className="optional">(optional)</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="attr1Name" 
+                    className="form-input"
+                    value={form.attr1Name} 
+                    onChange={handleInputChange} 
+                    placeholder="e.g., Rarity"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="attr1Value" className="form-label">
+                    Trait Value <span className="optional">(optional)</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="attr1Value" 
+                    className="form-input"
+                    value={form.attr1Value} 
+                    onChange={handleInputChange} 
+                    placeholder="e.g., Legendary"
+                  />
+                </div>
+              </div>
+
+              <button 
+                type="submit" 
+                className="mint-button"
+                disabled={!validateForm() || isMinting}
+              >
+                {isMinting ? (
+                  <>
+                    <span className="loading-spinner"></span>
+                    Minting...
+                  </>
+                ) : (
+                  <>
+                    <span className="mint-icon">✨</span>
+                    Mint NFT
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Success Message */}
         {isSuccess && txData && (
-          <div>
-            <p>NFT Minted!</p>
+          <div className="success-message">
+            <div className="success-icon">🎉</div>
+            <h3>NFT Minted Successfully!</h3>
+            <p>Your NFT has been created and minted to the blockchain.</p>
             <a
               href={`https://sepolia.etherscan.io/tx/${txData}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ color: '#4F46E5', textDecoration: 'underline' }}
+              className="etherscan-link"
             >
-              View Transaction on Etherscan
+              View on Etherscan →
             </a>
           </div>
         )}
-        {error && <div style={{ color: 'red' }}>{(error as Error).message}</div>}
+
+        {/* Error Message */}
+        {error && (
+          <div className="error-message">
+            <div className="error-icon">⚠️</div>
+            <p>{(error as Error).message}</p>
+          </div>
+        )}
       </div>
     </div>
   );
