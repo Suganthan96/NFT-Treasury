@@ -1,5 +1,6 @@
 import ChromaGrid, { ChromaItem } from "../components/NFTcard";
 import BlurText from "../components/BlurText";
+import AnimatedBackground from "../components/AnimatedBackground";
 import "../index.css";
 import { Alchemy, Network } from "alchemy-sdk";
 import Navbar from "../components/Navbar";
@@ -268,9 +269,14 @@ export default function Home() {
   ];
 
   return (
-    <div className="page modern-bg">
-      <Navbar />
-      <div className="content-wrapper">
+    <div className="page modern-bg relative">
+      {/* Animated Background */}
+      <AnimatedBackground />
+      
+      {/* Main Content */}
+      <div className="relative z-10">
+        <Navbar />
+        <div className="content-wrapper">
         {/* Hero Section */}
         <div className="home-hero">
           <div className="hero-content">
@@ -359,6 +365,7 @@ export default function Home() {
             }}></div>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
